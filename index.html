@@ -1,254 +1,206 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>For My Forever Valentine</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+<title>For My Forever Valentine 💕</title>
 
 <style>
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #f8cdda, #fbe7d5);
+  overflow-x: hidden;
 }
 
-body{
-  font-family:'Poppins',sans-serif;
-  background:black;
-  color:white;
-  overflow-x:hidden;
+section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  text-align: center;
 }
 
-/* INTRO SCREEN */
-
-#login{
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  background:linear-gradient(135deg,#1a1a1a,#2d0b2e);
-  text-align:center;
+h1, h2 {
+  color: #e63973;
 }
 
-#login h1{
-  font-family:'Playfair Display',serif;
-  font-size:50px;
-  margin-bottom:20px;
-  color:#ff9ecf;
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+  max-width: 900px;
+  margin: 20px auto;
 }
 
-input{
-  padding:12px 20px;
-  border-radius:30px;
-  border:none;
-  text-align:center;
-  font-size:16px;
+img {
+  width: 250px;
+  border-radius: 15px;
+  margin: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  transition: 0.4s;
 }
 
-button{
-  margin-top:20px;
-  padding:12px 30px;
-  border-radius:30px;
-  border:none;
-  background:#ff4d88;
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-  transition:0.3s;
+img:hover {
+  transform: scale(1.05);
 }
 
-button:hover{
-  background:#ff1f6a;
+.hidden {
+  display: none;
 }
 
-.hidden{
-  display:none;
+button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  background-color: #ff4d88;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
 }
-
-/* MAIN CONTENT */
-
-section{
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:100px 20px;
-  text-align:center;
-  position:relative;
-}
-
-.card{
-  background:rgba(255,255,255,0.08);
-  backdrop-filter:blur(15px);
-  padding:60px;
-  border-radius:30px;
-  max-width:900px;
-  animation:fadeIn 1.5s ease forwards;
-}
-
-h2{
-  font-family:'Playfair Display',serif;
-  font-size:42px;
-  margin-bottom:20px;
-  color:#ff9ecf;
-}
-
-p{
-  font-size:18px;
-  line-height:1.8;
-  opacity:0.9;
-}
-
-img{
-  width:100%;
-  max-width:500px;
-  margin:30px 0;
-  border-radius:20px;
-  box-shadow:0 25px 60px rgba(0,0,0,0.6);
-  transition:0.5s;
-}
-
-img:hover{
-  transform:scale(1.05);
-}
-
-/* PARALLAX SECTIONS */
-
-.parallax{
-  background-attachment:fixed;
-  background-size:cover;
-  background-position:center;
-}
-
-/* FADE ANIMATION */
-
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(40px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-/* FLOATING HEARTS */
-
-.heart{
-  position:fixed;
-  bottom:-50px;
-  font-size:20px;
-  animation:floatUp 6s linear infinite;
-  opacity:0.7;
-}
-
-@keyframes floatUp{
-  0%{transform:translateY(0);}
-  100%{transform:translateY(-100vh);}
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- PASSWORD SCREEN -->
-<div id="login">
-  <h1>For My Forever Valentine</h1>
-  <p>This world is only for you.</p>
-  <br>
-  <input type="password" id="password" placeholder="Enter password">
-  <br>
-  <button onclick="checkPassword()">Enter</button>
-</div>
+<!-- PASSWORD PAGE -->
+<section id="login">
+  <div class="card">
+    <h1>For My Forever Valentine 💕</h1>
+    <p>This little world is only for you.</p>
+    <input type="password" id="password" placeholder="Enter password">
+    <br><br>
+    <button onclick="checkPassword()">Enter</button>
+  </div>
+</section>
 
 <!-- MAIN CONTENT -->
 <div id="content" class="hidden">
 
-<audio id="bgMusic" loop>
+<!-- MUSIC -->
+<audio autoplay loop>
   <source src="song.mp3" type="audio/mpeg">
 </audio>
 
-<section class="parallax" style="background-image:url('us1.jpg')">
-  <div class="card">
-    <h2>Our Love Story</h2>
-    <p>You are my answered prayer, my safe place, my forever.</p>
-  </div>
+<!-- 1 COVER -->
+<section>
+  <h1>Our Love Story 💖</h1>
+  <p>You are my answered prayer, my safe place, my forever.</p>
 </section>
 
+<!-- 2 DAY WE MET -->
 <section>
   <div class="card">
-    <h2>The Day We Met</h2>
+    <h2>The Day We Met ❤️</h2>
+    <img src="us1.jpg">
     <img src="us2.jpg">
-    <p>I was asked to train you… I didn’t know I was meeting my future.</p>
+    <p>We met at work when I was asked to train you. You didn’t like my vibe at first… but I kept pushing. That day we went home together changed everything.</p>
   </div>
 </section>
 
-<section class="parallax" style="background-image:url('us3.jpg')">
-  <div class="card">
-    <h2>Our First Date</h2>
-    <p>Bowling. Shopping. Exploring. I was nervous but excited.</p>
-  </div>
-</section>
-
+<!-- 3 FIRST DATE -->
 <section>
   <div class="card">
-    <h2>The Gossip Era</h2>
+    <h2>Our First Date 🎳🛍️</h2>
+    <img src="us3.jpg">
     <img src="us4.jpg">
-    <p>We give tea everywhere we go 😂 One day utasema ntakuja kupigwa aki sisi.</p>
+    <p>Bowling, shopping, exploring. I was nervous but excited. You were amazing. I still smile thinking about it.</p>
   </div>
 </section>
 
+<!-- 4 POLITICAL FIGHT -->
 <section>
   <div class="card">
-    <h2>The Political Debate</h2>
+    <h2>Our Funny Fights 😂</h2>
+    <img src="us5.jpg">
+    <p>Raila vs Ruto. You supporting yours, me supporting mine. We slept mad… argued again in the morning… but still chose each other.</p>
+  </div>
+</section>
+
+<!-- 5 GOSSIP ERA -->
+<section>
+  <div class="card">
+    <h2>Tea Time ☕</h2>
+    <img src="us6.jpg">
+    <p>We gossip at events like professionals. “Ntakuja kupigwa one day” but still we continue 😂</p>
+  </div>
+</section>
+
+<!-- 6 ADVENTURES -->
+<section>
+  <div class="card">
+    <h2>Adventures 🌍</h2>
+    <img src="us7.jpg">
+    <img src="us8.jpg">
+    <p>New places, new memories, new laughs. Every outing with you feels special.</p>
+  </div>
+</section>
+
+<!-- 7 SOFT MOMENTS -->
+<section>
+  <div class="card">
+    <h2>Soft Moments 💕</h2>
+    <img src="us9.jpg">
+    <p>Through laughs, fights, gossip and dreams — I choose you every day.</p>
+  </div>
+</section>
+
+<!-- 8 BOOT SERIES -->
+<section>
+  <div class="card">
+    <h2>More Memories ✨</h2>
     <img src="boot1.jpg">
-    <p>Raila vs Ruto. Slept mad. Woke up arguing kiasi. Still chose each other.</p>
+    <img src="boot2.jpg">
+    <img src="boot3.jpg">
   </div>
 </section>
 
-<section class="parallax" style="background-image:url('wedding1.jpg')">
-  <div class="card">
-    <h2>Forever & Always</h2>
-    <p>Through laughter, fights, gossip and dreams — I choose you every single day.</p>
-  </div>
-</section>
-
+<!-- 9 MORE BOOT -->
 <section>
   <div class="card">
-    <h2>My Forever Valentine</h2>
-    <img src="wedding2.jpg">
-    <p>Boothang… you are my greatest blessing.</p>
+    <img src="boot4.jpg">
+    <img src="boot5.jpg">
+    <img src="boot6.jpg">
   </div>
+</section>
+
+<!-- 10 WEDDING VIBES -->
+<section>
+  <div class="card">
+    <h2>Future Dreams 💍</h2>
+    <img src="wedding1.jpg">
+    <img src="wedding2.jpg">
+    <img src="wedding3.jpg">
+    <p>One day… us forever.</p>
+  </div>
+</section>
+
+<!-- 11 PINK PAGE -->
+<section>
+  <div class="card">
+    <img src="pink.jpg">
+  </div>
+</section>
+
+<!-- 12 FINAL -->
+<section>
+  <h2>Forever & Always 💞</h2>
+  <p>No matter what… you are my BooThang43.</p>
 </section>
 
 </div>
 
 <script>
-
-function checkPassword(){
-  var pass=document.getElementById("password").value;
-  if(pass==="Boothang43"){
-    document.getElementById("login").style.display="none";
+function checkPassword() {
+  var pass = document.getElementById("password").value;
+  if(pass === "Boothang43") {
+    document.getElementById("login").style.display = "none";
     document.getElementById("content").classList.remove("hidden");
-    document.getElementById("bgMusic").play();
-    startHearts();
-  }else{
-    alert("Wrong password my love 💔");
+  } else {
+    alert("Wrong password 💔");
   }
 }
-
-/* FLOATING HEARTS FUNCTION */
-function startHearts(){
-  setInterval(function(){
-    var heart=document.createElement("div");
-    heart.className="heart";
-    heart.innerHTML="💖";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.fontSize=(Math.random()*20+15)+"px";
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),6000);
-  },800);
-}
-
 </script>
 
 </body>
