@@ -71,7 +71,15 @@ function checkPassword() {
   var pass = document.getElementById("password").value;
   if(pass === "BooThang💕") {
     document.getElementById("login").style.display = "none";
-    document.getElementById("content").classList.remove("hidden");
+  function checkPassword() {
+  var pass = document.getElementById("password").value;
+  if(pass === "BooThang💕") {
+    window.location.href = "scrapbook.html";
+  } else {
+    alert("Wrong password my love 💔");
+  }
+}
+
   } else {
     alert("Wrong password my love 💔");
   }
