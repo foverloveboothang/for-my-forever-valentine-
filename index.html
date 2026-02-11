@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For My Forever Valentine 💕</title>
+<style>
+body {
+  background: linear-gradient(to bottom right, #ffd6e8, #fbe7d5);
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  padding: 50px;
+}
+
+.container {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  max-width: 700px;
+  margin: auto;
+}
+
+h1 {
+  color: #e63973;
+}
+
+button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  background-color: #ff4d88;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container" id="login">
+<h1>For My Forever Valentine 💕</h1>
+<p>This little world is only for you.</p>
+<input type="password" id="password" placeholder="Enter password">
+<br><br>
+<button onclick="checkPassword()">Enter</button>
+</div>
+
+<div class="container hidden" id="content">
+<h1>Our Love Story 💖</h1>
+<p>You are my answered prayer, my safe place, my forever.</p>
+
+<iframe src="YOUR_PDF_LINK_HERE" width="100%" height="500px"></iframe>
+
+<br><br>
+<audio autoplay loop controls>
+  <source src="YOUR_MP3_LINK_HERE" type="audio/mpeg">
+</audio>
+
+</div>
+
+<script>
+function checkPassword() {
+  var pass = document.getElementById("password").value;
+  if(pass === "BooThang💕") {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("content").classList.remove("hidden");
+  } else {
+    alert("Wrong password my love 💔");
+  }
+}
+</script>
+
+</body>
+</html>
