@@ -2,201 +2,254 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>For My Forever Valentine 💕</title>
+<title>For My Forever Valentine</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-body {
-  background: linear-gradient(135deg,#ffd6e8,#fbe7d5);
-  overflow-x: hidden;
+body{
+  font-family:'Poppins',sans-serif;
+  background:black;
+  color:white;
+  overflow-x:hidden;
 }
 
-section {
-  min-height: 100vh;
-  padding: 80px 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* INTRO SCREEN */
+
+#login{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  background:linear-gradient(135deg,#1a1a1a,#2d0b2e);
+  text-align:center;
 }
 
-.card {
-  background: white;
-  padding: 50px;
-  border-radius: 25px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-  max-width: 900px;
-  text-align: center;
-  animation: fadeUp 1.2s ease forwards;
+#login h1{
+  font-family:'Playfair Display',serif;
+  font-size:50px;
+  margin-bottom:20px;
+  color:#ff9ecf;
 }
 
-h1 {
-  color: #e63973;
-  margin-bottom: 20px;
+input{
+  padding:12px 20px;
+  border-radius:30px;
+  border:none;
+  text-align:center;
+  font-size:16px;
 }
 
-h2 {
-  color: #ff4d88;
-  margin-bottom: 15px;
+button{
+  margin-top:20px;
+  padding:12px 30px;
+  border-radius:30px;
+  border:none;
+  background:#ff4d88;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
 }
 
-p {
-  color: #444;
-  line-height: 1.6;
-  margin-bottom: 20px;
+button:hover{
+  background:#ff1f6a;
 }
 
-img {
-  width: 100%;
-  max-width: 400px;
-  border-radius: 20px;
-  margin: 15px 0;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+.hidden{
+  display:none;
 }
 
-button {
-  padding: 12px 30px;
-  border: none;
-  border-radius: 30px;
-  background: #ff4d88;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
+/* MAIN CONTENT */
+
+section{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:100px 20px;
+  text-align:center;
+  position:relative;
 }
 
-input {
-  padding: 10px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-  width: 250px;
-  text-align: center;
+.card{
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(15px);
+  padding:60px;
+  border-radius:30px;
+  max-width:900px;
+  animation:fadeIn 1.5s ease forwards;
 }
 
-.hidden {
-  display: none;
+h2{
+  font-family:'Playfair Display',serif;
+  font-size:42px;
+  margin-bottom:20px;
+  color:#ff9ecf;
 }
 
-@keyframes fadeUp {
-  from { opacity:0; transform:translateY(40px);}
-  to { opacity:1; transform:translateY(0);}
+p{
+  font-size:18px;
+  line-height:1.8;
+  opacity:0.9;
 }
+
+img{
+  width:100%;
+  max-width:500px;
+  margin:30px 0;
+  border-radius:20px;
+  box-shadow:0 25px 60px rgba(0,0,0,0.6);
+  transition:0.5s;
+}
+
+img:hover{
+  transform:scale(1.05);
+}
+
+/* PARALLAX SECTIONS */
+
+.parallax{
+  background-attachment:fixed;
+  background-size:cover;
+  background-position:center;
+}
+
+/* FADE ANIMATION */
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(40px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* FLOATING HEARTS */
+
+.heart{
+  position:fixed;
+  bottom:-50px;
+  font-size:20px;
+  animation:floatUp 6s linear infinite;
+  opacity:0.7;
+}
+
+@keyframes floatUp{
+  0%{transform:translateY(0);}
+  100%{transform:translateY(-100vh);}
+}
+
 </style>
 </head>
 
 <body>
 
 <!-- PASSWORD SCREEN -->
-<section id="login">
-  <div class="card">
-    <h1>For My Forever Valentine 💕</h1>
-    <p>This little world is only for you.</p>
-    <br>
-    <input type="password" id="password" placeholder="Enter password">
-    <br><br>
-    <button onclick="checkPassword()">Enter</button>
-  </div>
-</section>
+<div id="login">
+  <h1>For My Forever Valentine</h1>
+  <p>This world is only for you.</p>
+  <br>
+  <input type="password" id="password" placeholder="Enter password">
+  <br>
+  <button onclick="checkPassword()">Enter</button>
+</div>
 
 <!-- MAIN CONTENT -->
 <div id="content" class="hidden">
 
-<!-- MUSIC -->
 <audio id="bgMusic" loop>
   <source src="song.mp3" type="audio/mpeg">
 </audio>
 
+<section class="parallax" style="background-image:url('us1.jpg')">
+  <div class="card">
+    <h2>Our Love Story</h2>
+    <p>You are my answered prayer, my safe place, my forever.</p>
+  </div>
+</section>
+
+<section>
+  <div class="card">
+    <h2>The Day We Met</h2>
+    <img src="us2.jpg">
+    <p>I was asked to train you… I didn’t know I was meeting my future.</p>
+  </div>
+</section>
+
+<section class="parallax" style="background-image:url('us3.jpg')">
+  <div class="card">
+    <h2>Our First Date</h2>
+    <p>Bowling. Shopping. Exploring. I was nervous but excited.</p>
+  </div>
+</section>
+
+<section>
+  <div class="card">
+    <h2>The Gossip Era</h2>
+    <img src="us4.jpg">
+    <p>We give tea everywhere we go 😂 One day utasema ntakuja kupigwa aki sisi.</p>
+  </div>
+</section>
+
+<section>
+  <div class="card">
+    <h2>The Political Debate</h2>
+    <img src="boot1.jpg">
+    <p>Raila vs Ruto. Slept mad. Woke up arguing kiasi. Still chose each other.</p>
+  </div>
+</section>
+
+<section class="parallax" style="background-image:url('wedding1.jpg')">
+  <div class="card">
+    <h2>Forever & Always</h2>
+    <p>Through laughter, fights, gossip and dreams — I choose you every single day.</p>
+  </div>
+</section>
+
+<section>
+  <div class="card">
+    <h2>My Forever Valentine</h2>
+    <img src="wedding2.jpg">
+    <p>Boothang… you are my greatest blessing.</p>
+  </div>
+</section>
+
+</div>
+
 <script>
-function checkPassword() {
-  var pass = document.getElementById("password").value;
-  if(pass === "Boothang43") {
-    document.getElementById("login").style.display = "none";
+
+function checkPassword(){
+  var pass=document.getElementById("password").value;
+  if(pass==="Boothang43"){
+    document.getElementById("login").style.display="none";
     document.getElementById("content").classList.remove("hidden");
     document.getElementById("bgMusic").play();
-  } else {
+    startHearts();
+  }else{
     alert("Wrong password my love 💔");
   }
 }
+
+/* FLOATING HEARTS FUNCTION */
+function startHearts(){
+  setInterval(function(){
+    var heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="💖";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*20+15)+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+  },800);
+}
+
 </script>
-
-<!-- 12 STORY SECTIONS -->
-
-<section><div class="card">
-<h1>Our Love Story 💖</h1>
-<p>You are my answered prayer, my safe place, my forever.</p>
-</div></section>
-
-<section><div class="card">
-<h2>The Day We Met ❤️</h2>
-<img src="us1.jpg">
-<p>We met at work when I was asked to train you… I didn’t know that day would change everything.</p>
-</div></section>
-
-<section><div class="card">
-<h2>Our First Date 🎳🛍️</h2>
-<img src="us2.jpg">
-<p>Bowling, shopping, exploring… I was nervous but excited. You were amazing.</p>
-</div></section>
-
-<section><div class="card">
-<h2>The Gossip Era ☕</h2>
-<img src="us3.jpg">
-<p>We keep gossiping at events and giving tea until one day you’ll say “ntakujwa kupigwa aki sisi” 😂</p>
-</div></section>
-
-<section><div class="card">
-<h2>The Political Fight 🇰🇪</h2>
-<img src="us4.jpg">
-<p>Raila vs Ruto… we argued, slept mad, woke up still arguing kiasi… but love always wins.</p>
-</div></section>
-
-<section><div class="card">
-<h2>Our Adventures 🌍</h2>
-<img src="boot1.jpg">
-<p>Exploring new places together made everything more beautiful.</p>
-</div></section>
-
-<section><div class="card">
-<h2>Through Laughter 😂</h2>
-<img src="boot2.jpg">
-<p>You make even normal days feel magical.</p>
-</div></section>
-
-<section><div class="card">
-<h2>Through Tough Days 💪</h2>
-<img src="boot3.jpg">
-<p>Even when we fight, I still choose you.</p>
-</div></section>
-
-<section><div class="card">
-<h2>Our Soft Moments 💕</h2>
-<img src="us5.jpg">
-<p>The quiet hugs. The forehead kisses. The peace.</p>
-</div></section>
-
-<section><div class="card">
-<h2>Dreaming Together 💭</h2>
-<img src="wedding1.jpg">
-<p>Talking about our future… building something real.</p>
-</div></section>
-
-<section><div class="card">
-<h2>Forever & Always ♾️</h2>
-<img src="wedding2.jpg">
-<p>Through laughs, fights, gossip and dreams — I choose you every day.</p>
-</div></section>
-
-<section><div class="card">
-<h1>My Forever Valentine ❤️</h1>
-<img src="wedding3.jpg">
-<p>Boothang… I love you more than words can ever explain.</p>
-</div></section>
-
-</div>
 
 </body>
 </html>
