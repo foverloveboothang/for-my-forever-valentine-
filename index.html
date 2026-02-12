@@ -9,16 +9,12 @@
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-background:#f3ede3;
+background:#f5f1e8;
 font-family:'Inter',sans-serif;
-color:#3a3126;
+color:#2f2a23;
 overflow-x:hidden;
 }
 
@@ -28,33 +24,51 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-padding:60px 8%;
+padding:80px 10%;
 text-align:center;
+border-bottom:1px solid #e8e1d5;
 }
 
 h1,h2{
 font-family:'Playfair Display',serif;
-color:#5c4a34;
-margin-bottom:25px;
+font-weight:600;
+margin-bottom:30px;
+color:#4a3f32;
 }
 
 p{
 max-width:750px;
 line-height:1.9;
 font-size:18px;
-margin-bottom:20px;
+margin-bottom:25px;
 }
 
-.image{
-margin-top:30px;
+.split{
+display:flex;
+flex-wrap:wrap;
+gap:40px;
+align-items:center;
+justify-content:center;
 }
 
-.image img{
-width:100%;
-max-width:500px;
-border-radius:12px;
+.images{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+justify-content:center;
+}
+
+.images img{
+width:320px;
+height:420px;
 object-fit:cover;
-box-shadow:0 15px 40px rgba(0,0,0,0.08);
+border-radius:14px;
+box-shadow:0 15px 35px rgba(0,0,0,0.08);
+transition:transform .6s ease;
+}
+
+.images img:hover{
+transform:scale(1.03);
 }
 
 .fade{
@@ -74,29 +88,34 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-background:#f3ede3;
+background:#f5f1e8;
 }
 
 input{
 padding:14px;
-border:1px solid #cbbda6;
-border-radius:6px;
 width:260px;
+border:1px solid #d2c6b3;
+border-radius:8px;
 text-align:center;
 }
 
 button{
 margin-top:20px;
 padding:12px 30px;
-background:#5c4a34;
+background:#4a3f32;
 color:white;
 border:none;
-border-radius:6px;
+border-radius:8px;
 cursor:pointer;
 }
 
-audio{
-display:none;
+audio{display:none;}
+
+@media(max-width:768px){
+.images img{
+width:90%;
+height:auto;
+}
 }
 
 </style>
@@ -112,147 +131,109 @@ display:none;
 
 <div id="main" style="display:none;">
 
-<!-- 1: Opening (NO IMAGE) -->
 <section class="fade">
 <h1>The Day We Met</h1>
 <p>
 We met at work when I was asked to train you.
 I fell for you instantly, even though you didn’t like my vibe at first 😅
 I kept pushing, and one day it worked.
-The day you left, we went home together —
-and that’s when everything clicked.
+The day you left, we went home together — and that’s when everything clicked.
 </p>
 </section>
 
-<!-- 2 -->
 <section class="fade">
 <h2>Our First Date</h2>
-<p>
-We went bowling, did a little shopping, and explored together.
+<p>We went bowling, did a little shopping, and explored together.
 I was excited and nervous at first, but it turned into such a fun day.
 We laughed, enjoyed every moment, and you completely surprised me — especially at bowling 😍
-That day will always stay with me.
-</p>
-<div class="image">
-<img src="us1.jpg" loading="lazy">
+That day will always stay with me.</p>
+<div class="images">
+<img src="us27.jpg">
+<img src="us2.jpg">
 </div>
 </section>
 
-<!-- 3 -->
 <section class="fade">
 <h2>Our Journey</h2>
-<p>
-We met at work… and the spark was for me it was instant.
+<p>We met at work… and the spark was for me it was instant.
 Surely love at first sight.
-From bowling to shopping and exploring.
-</p>
-<div class="image">
-<img src="us2.jpg" loading="lazy">
+From bowling to shopping and exploring.</p>
+<div class="images">
+<img src="us4.jpg">
+<img src="us5.jpg">
 </div>
 </section>
 
-<!-- 4 -->
 <section class="fade">
 <h2>Our Ups and Downs</h2>
-<p>
-Do you still remember our first big argument?
+<p>Do you still remember our first big argument?
 We fought about politics — Raila vs Ruto 😅
 You were team Ruto, I was team Raila, and we were both stubborn.
 We even slept mad and continued the argument kidogo the next morning.
-But we talked it out… and love won 🤍
-</p>
-<div class="image">
-<img src="us3.jpg" loading="lazy">
+But we talked it out… and love won 🤍</p>
+<div class="images">
+<img src="us1.jpg">
+<img src="u23.jpg">
 </div>
 </section>
 
-<!-- 5 -->
 <section class="fade">
 <h2>Just Between Us</h2>
-<p>
-Do you remember how we’d keep gossiping about people everywhere we went, especially at events? 😂
+<p>Do you remember how we’d keep gossiping about people everywhere we went, especially at events? 😂
 Always giving tea, always whispering, until you’d laugh and say,
-“Ntakuja kupigwa one day, aki sisi.” 🤍
-</p>
-<div class="image">
-<img src="us4.jpg" loading="lazy">
+“Ntakuja kupigwa one day, aki sisi.” 🤍</p>
+<div class="images">
+<img src="us24.jpg">
+<img src="us26.jpg">
 </div>
 </section>
 
-<!-- 6 -->
 <section class="fade">
 <h2>My Favorite Moments</h2>
-<p>
-There are so many things that we did that never fail to make me smile and these are my top 3:
-• when you first kissed me kwa ile uber
+<p>• when you first kissed me kwa ile uber
 • when we went for bowling
-• when we had that December holiday kwenyu
-</p>
-<div class="image">
-<img src="us5.jpg" loading="lazy">
+• when we had that December holiday kwenyu</p>
+<div class="images">
+<img src="us21.jpg">
+<img src="us6.jpg">
 </div>
 </section>
 
-<!-- 7 -->
 <section class="fade">
 <h2>Inside Jokes</h2>
-<p>
-We both love to joke around. Our little inside jokes make me smile when I remember them even when we are not together.
+<p>We both love to joke around...
 • Unakumba what has happed na ule makanga wa Hii ni nini
-I’m sure our unique humor makes our bond stronger.
-</p>
-<div class="image">
-<img src="us6.jpg" loading="lazy">
+I’m sure our unique humor makes our bond stronger.</p>
+<div class="images">
+<img src="us25.jpg">
+<img src="us10.jpg">
 </div>
 </section>
 
-<!-- 8 -->
 <section class="fade">
 <h2>My Favorite Melody for Us</h2>
-<p>
-When we asked each other what song we would like to be played on our wedding day,
+<p>When we asked each other what song we would like to be played on our wedding day,
 we both said the same thing.
 (A Thousand Years – Christina Perri & Beautiful in White – Shane Filan)
-We’re going to make sure it will be played when I walk down the aisle.
-</p>
-<div class="image">
-<img src="us7.jpg" loading="lazy">
+We’re going to make sure it will be played when I walk down the aisle.</p>
+<div class="images">
+<img src="us20.jpg">
+<img src="us14.jpg">
+<img src="us22.jpg">
 </div>
 </section>
 
-<!-- 9 -->
 <section class="fade">
 <h2>Our First Wedding Together</h2>
-<div class="image">
-<img src="us8.jpg" loading="lazy">
+<div class="images">
+<img src="us3.jpg">
+<img src="us28.jpg">
 </div>
 </section>
 
-<!-- 10 -->
 <section class="fade">
-<h2>When You Accepted to be My Girlfriend</h2>
-<p>
-You made me the happiest man in the whole world.
-I was so excited to spend the rest of my life loving and spoiling you until uchoke babe.
-I hope am doing a great job as your boyfriend so far.
-</p>
-<div class="image">
-<img src="us9.jpg" loading="lazy">
-</div>
-</section>
-
-<!-- 11 -->
-<section class="fade">
-<h2>From Me To You</h2>
-<p>
-I will always be thankful that we met.
-You have changed my life in so many ways.
-There is nothing I would want more than to spend the rest of my life with my forever Valentine.
-</p>
 <h1>I LOVE AND ADORE YOU PAUL.</h1>
-<div class="image">
-<img src="us10.jpg" loading="lazy">
-</div>
+<p>There is nothing I would want more than to spend the rest of my life with my forever Valentine.</p>
 </section>
 
 </div>
@@ -262,10 +243,8 @@ There is nothing I would want more than to spend the rest of my life with my for
 </audio>
 
 <script>
-
 function unlock(){
-var pass=document.getElementById("password").value;
-if(pass==="Boothang43"){
+if(document.getElementById("password").value==="Boothang43"){
 document.getElementById("login").style.display="none";
 document.getElementById("main").style.display="block";
 document.getElementById("music").play();
@@ -274,7 +253,7 @@ alert("Wrong password");
 }
 }
 
-const sections=document.querySelectorAll(".fade");
+const faders=document.querySelectorAll(".fade");
 const observer=new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
 if(entry.isIntersecting){
@@ -283,10 +262,7 @@ entry.target.classList.add("show");
 });
 },{threshold:0.2});
 
-sections.forEach(section=>{
-observer.observe(section);
-});
-
+faders.forEach(f=>observer.observe(f));
 </script>
 
 </body>
