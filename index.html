@@ -1,57 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Love Story</title>
+<title>For My Forever Valentine</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 
 body{
 margin:0;
-font-family:'Poppins',sans-serif;
-background:#f4efe8;
-color:#3e3426;
-scroll-behavior:smooth;
+background:linear-gradient(to bottom,#f6f1e8,#efe7d8);
+font-family:'Inter',sans-serif;
+color:#3e3428;
+overflow-x:hidden;
+}
+
+section{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:60px 20px;
+text-align:center;
 }
 
 h1,h2{
 font-family:'Playfair Display',serif;
-color:#8b6f47;
+color:#6e5a3d;
+margin-bottom:20px;
 }
 
-section{
-padding:80px 20px;
-max-width:900px;
-margin:auto;
-text-align:center;
-}
-
-.card{
-background:white;
-padding:50px 35px;
-margin-bottom:50px;
-border-radius:12px;
+p{
+max-width:750px;
+line-height:1.8;
+font-size:18px;
 }
 
 .gallery{
+margin-top:30px;
 display:flex;
 flex-wrap:wrap;
 gap:15px;
 justify-content:center;
-margin-top:25px;
 }
 
 .gallery img{
 width:240px;
 height:320px;
 object-fit:cover;
-border-radius:10px;
+border-radius:8px;
+transition:transform .4s ease;
 }
 
-/* Login */
+.gallery img:hover{
+transform:scale(1.05);
+}
+
+.fade{
+opacity:0;
+transform:translateY(40px);
+transition:all 1s ease;
+}
+
+.fade.visible{
+opacity:1;
+transform:translateY(0);
+}
 
 #login{
 height:100vh;
@@ -59,24 +76,24 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-background:#f4efe8;
+background:#f6f1e8;
 }
 
 input{
 padding:12px;
-border-radius:20px;
-border:1px solid #c9b79c;
-width:230px;
+border:1px solid #cbbba0;
+border-radius:6px;
+width:250px;
 text-align:center;
 }
 
 button{
 margin-top:15px;
 padding:10px 25px;
-border:none;
-border-radius:20px;
-background:#8b6f47;
+background:#6e5a3d;
 color:white;
+border:none;
+border-radius:6px;
 cursor:pointer;
 }
 
@@ -97,86 +114,159 @@ display:none;
 
 <div id="main" style="display:none;">
 
-<section>
-<h1>Celebrating Us This Valentine’s Day</h1>
-<p>You are my answered prayer, my safe place, my forever.</p>
-</section>
-
-<section class="card">
-<h2>The Day We Met</h2>
-<p>We met at work when I was asked to train you on the job. The moment I saw you, something in me shifted. I knew there was something special about you. You didn’t like my first vibe, and you were even annoyed by me. But I kept trying. I kept showing up. And then the day you left the company, we happened to go home together. That simple walk changed everything. That was the beginning of us — and my dream slowly started becoming real.</p>
+<section class="fade">
+<h1>The Day We Met</h1>
+<p>
+We met at work when I was asked to train you.
+I fell for you instantly, even though you didn’t like my vibe at first 😅
+I kept pushing, and one day it worked.
+The day you left, we went home together —
+that’s when everything clicked.
+</p>
 <div class="gallery">
-<img src="us1.jpg">
-<img src="us2.jpg">
+<img src="us1.jpg" loading="lazy">
+<img src="us2.jpg" loading="lazy">
 </div>
 </section>
 
-<section class="card">
+<section class="fade">
 <h2>Our First Date</h2>
-<p>On our first day out, we agreed to go bowling. I was excited and nervous at the same time. It turned out to be such a beautiful day. We bowled, we shopped, we explored, and we laughed. I still remember how good you were at bowling. That day will always mean something special to me.</p>
+<p>
+We went bowling, did a little shopping, and explored together.
+I was excited and nervous at first, but it turned into such a fun day.
+We laughed, enjoyed every moment, and you completely surprised me — especially at bowling 😍
+That day will always stay with me.
+</p>
 <div class="gallery">
-<img src="us3.jpg">
-<img src="us4.jpg">
+<img src="us3.jpg" loading="lazy">
+<img src="us4.jpg" loading="lazy">
 </div>
 </section>
 
-<section class="card">
+<section class="fade">
 <h2>Our Journey</h2>
-<p>From strangers to lovers. From simple conversations to deep connection. Our journey has been filled with growth, patience, laughter, and learning each other more every day.</p>
+<p>
+We met at work… and the spark was for me it was instant.
+Surely love at first sight.
+From bowling to shopping and exploring.
+</p>
 <div class="gallery">
-<img src="us5.jpg">
-<img src="us6.jpg">
+<img src="us5.jpg" loading="lazy">
 </div>
 </section>
 
-<section class="card">
+<section class="fade">
 <h2>Our Ups and Downs</h2>
-<p>We have had our small disagreements — even about Raila and Ruto. We once slept mad at each other and argued again in the morning. But even in those moments, we never stopped choosing each other. We always found our way back.</p>
+<p>
+Do you still remember our first big argument?
+We fought about politics — Raila vs Ruto 😅
+You were team Ruto, I was team Raila, and we were both stubborn.
+We even slept mad and continued the argument kidogo the next morning.
+But we talked it out… and love won 🤍
+</p>
 <div class="gallery">
-<img src="us7.jpg">
-<img src="us8.jpg">
+<img src="us6.jpg" loading="lazy">
+<img src="us7.jpg" loading="lazy">
 </div>
 </section>
 
-<section class="card">
+<section class="fade">
 <h2>Just Between Us</h2>
-<p>We keep gossiping at events, giving tea about people around us until you joke that one day someone will beat us. Those small playful moments are part of what makes us, us.</p>
+<p>
+Do you remember how we’d keep gossiping about people everywhere we went, especially at events? 😂
+Always giving tea, always whispering, until you’d laugh and say,
+“Ntakuja kupigwa one day, aki sisi.” 🤍
+</p>
 <div class="gallery">
-<img src="us9.jpg">
-<img src="us10.jpg">
+<img src="us8.jpg" loading="lazy">
 </div>
 </section>
 
-<section class="card">
-<h2>Our Favorite Moments</h2>
+<section class="fade">
+<h2>My Favorite Moments</h2>
+<p>
+There are so many things that we did that never fail to make me smile and these are my top 3:
+</p>
+<p>
+• when you first kissed me kwa ile uber <br>
+• when we went for bowling <br>
+• when we had that December holiday kwenyu
+</p>
 <div class="gallery">
-<img src="us11.jpg">
-<img src="us12.jpg">
-<img src="us13.jpg">
-<img src="us14.jpg">
+<img src="us9.jpg" loading="lazy">
+<img src="us10.jpg" loading="lazy">
 </div>
 </section>
 
-<section class="card">
-<h2>More Beautiful Memories</h2>
+<section class="fade">
+<h2>Inside Jokes</h2>
+<p>
+We both love to joke around. Our little inside jokes make me smile when I remember them even when we are not together.
+</p>
+<p>
+• Unakumba what has happed na ule makanga wa Hii ni nini
+</p>
+<p>
+I’m sure our unique humor makes our bond stronger.
+</p>
 <div class="gallery">
-<img src="us15.jpg">
-<img src="us16.jpg">
-<img src="us17.jpg">
-<img src="us18.jpg">
-<img src="us19.jpg">
-<img src="us20.jpg">
+<img src="us11.jpg" loading="lazy">
 </div>
 </section>
 
-<section class="card">
+<section class="fade">
+<h2>My Favorite Melody for Us</h2>
+<p>
+When we asked each other what song we would like to be played on our wedding day,
+we both said the same thing.
+(A Thousand Years – Christina Perri & Beautiful in White – Shane Filan)
+We’re going to make sure it will be played when I walk down the aisle.
+</p>
+<div class="gallery">
+<img src="us12.jpg" loading="lazy">
+</div>
+</section>
+
+<section class="fade">
+<h2>Our First Wedding Together</h2>
+<div class="gallery">
+<img src="us13.jpg" loading="lazy">
+<img src="us14.jpg" loading="lazy">
+</div>
+</section>
+
+<section class="fade">
+<h2>When You Accepted to be My Girlfriend</h2>
+<p>
+You made me the happiest man in the whole world.
+I was so excited to spend the rest of my life loving and spoiling you until uchoke babe.
+I hope I am doing a great job as your boyfriend so far.
+</p>
+<div class="gallery">
+<img src="us15.jpg" loading="lazy">
+</div>
+</section>
+
+<section class="fade">
 <h2>From Me To You</h2>
-<p>I choose you. Today. Tomorrow. Always. No matter what comes our way, I want to grow with you, laugh with you, build with you, and love you intentionally. You are my forever Valentine.</p>
+<p>
+I will always be thankful that we met.
+You have changed my life in so many ways.
+There is nothing I would want more than to spend the rest of my life with my forever Valentine.
+</p>
+<h1>I LOVE AND ADORE YOU PAUL.</h1>
+<div class="gallery">
+<img src="us16.jpg" loading="lazy">
+<img src="us17.jpg" loading="lazy">
+<img src="us18.jpg" loading="lazy">
+<img src="us19.jpg" loading="lazy">
+<img src="us20.jpg" loading="lazy">
+</div>
 </section>
 
 </div>
 
-<audio id="music" loop>
+<audio id="music" autoplay loop>
 <source src="song.mp3" type="audio/mpeg">
 </audio>
 
@@ -187,15 +277,28 @@ var pass=document.getElementById("password").value;
 if(pass==="Boothang43"){
 document.getElementById("login").style.display="none";
 document.getElementById("main").style.display="block";
-
-let music=document.getElementById("music");
-music.volume=0.6;
-music.play().catch(()=>{});
-
+var audio=document.getElementById("music");
+audio.volume=0.6;
+audio.play().catch(()=>{});
 }else{
 alert("Wrong password");
 }
 }
+
+const faders=document.querySelectorAll(".fade");
+const appearOptions={threshold:0.2};
+
+const appearOnScroll=new IntersectionObserver(function(entries,observer){
+entries.forEach(entry=>{
+if(!entry.isIntersecting) return;
+entry.target.classList.add("visible");
+observer.unobserve(entry.target);
+});
+},appearOptions);
+
+faders.forEach(fader=>{
+appearOnScroll.observe(fader);
+});
 
 </script>
 
