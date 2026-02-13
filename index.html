@@ -3,23 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOVEFLIX | For My Forever Valentine</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <title>LOVEFLIX | Our Forever Story</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&family=Archivo+Black&display=swap" rel="stylesheet">
     <style>
         :root {
             --netflix-red: #E50914;
             --v-pink: #ff4d6d;
             --dark-bg: #141414;
-            --gradient-bg: radial-gradient(circle, rgba(65,10,20,1) 0%, rgba(20,20,20,1) 70%);
-            --card-bg: #181818;
-            --gray: #808080;
+            --gradient-bg: radial-gradient(circle, rgba(75,15,30,1) 0%, rgba(20,20,20,1) 80%);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--dark-bg);
-            /* This adds the cinematic depth you asked for */
             background: var(--gradient-bg);
             background-attachment: fixed;
             color: white;
@@ -27,428 +23,233 @@
             overflow-x: hidden;
         }
 
-        /* Subtle Grain Overlay for a Movie Look */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-            opacity: 0.1;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        /* --- LOGIN / PROFILE SELECTION --- */
+        /* --- LOGIN SCREEN --- */
         #login-overlay {
-            position: fixed;
-            inset: 0;
-            background: var(--dark-bg);
-            z-index: 3000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            position: fixed; inset: 0; background: var(--dark-bg); z-index: 3000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
-
-        .profile-gate h1 {
-            font-size: 3.5rem;
-            font-weight: 500;
-            margin-bottom: 2rem;
-            color: white;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
-
-        .profiles {
-            display: flex;
-            gap: 30px;
-            text-align: center;
-            z-index: 10;
-        }
-
-        .profile-card { cursor: pointer; transition: 0.3s; }
-
         .profile-img {
-            width: 160px;
-            height: 160px;
-            border-radius: 4px;
-            background-image: url('us27.jpg'); /* Using your photo as the profile pic */
-            background-size: cover;
-            background-position: center;
-            border: 4px solid transparent;
-            margin-bottom: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            width: 160px; height: 160px; border-radius: 4px;
+            background: url('us27.jpg') center/cover;
+            border: 4px solid transparent; cursor: pointer; transition: 0.3s;
         }
-
-        .profile-card:hover .profile-img { border-color: white; transform: scale(1.05); }
-        .profile-card p { color: var(--gray); font-size: 1.2rem; transition: 0.2s; }
-        .profile-card:hover p { color: white; }
-
-        #password-prompt {
-            display: none;
-            margin-top: 30px;
-            text-align: center;
-            animation: fadeIn 0.5s ease;
-        }
-
+        .profile-img:hover { border-color: white; transform: scale(1.05); }
+        #password-prompt { display: none; margin-top: 25px; text-align: center; }
         #password-prompt input {
-            background: rgba(51, 51, 51, 0.8);
-            border: 1px solid #555;
-            padding: 15px;
-            color: white;
-            border-radius: 4px;
-            width: 280px;
-            text-align: center;
-            outline: none;
-            font-size: 1.1rem;
-            transition: 0.3s;
+            background: #333; border: 1px solid #555; padding: 12px; color: white;
+            border-radius: 4px; width: 250px; text-align: center; outline: none; font-size: 1rem;
         }
 
-        #password-prompt input:focus { border-color: var(--netflix-red); background: #444; }
-
-        /* --- MAIN INTERFACE --- */
-        #main { display: none; position: relative; z-index: 2; }
-
+        /* --- MAIN UI --- */
+        #main { display: none; position: relative; }
         .navbar {
-            padding: 20px 4%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 15px 4%; background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+            position: fixed; width: 100%; z-index: 1000; display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { color: var(--netflix-red); font-size: 2rem; font-family: 'Archivo Black', sans-serif; text-decoration: none; }
+
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .logout-btn {
+            background: var(--netflix-red); color: white; border: none;
+            padding: 6px 15px; border-radius: 3px; font-weight: bold; cursor: pointer; font-size: 0.85rem;
         }
 
-        .logo { color: var(--netflix-red); font-size: 2.2rem; font-weight: bold; letter-spacing: -1.5px; }
-
-        /* HERO BANNER */
+        /* HERO */
         .hero {
-            height: 90vh;
-            background: linear-gradient(to right, rgba(20,20,20,0.9) 10%, rgba(20,20,20,0) 70%), url('us27.jpg');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            padding: 0 4%;
-            margin-bottom: 20px;
+            height: 80vh; background: linear-gradient(to right, #141414 10%, transparent 75%), url('us27.jpg') center/cover;
+            display: flex; align-items: center; padding: 0 4%;
         }
-
-        .hero-content { max-width: 700px; }
-        .hero-title { font-size: 4.5rem; font-family: 'Playfair Display', serif; margin-bottom: 1rem; text-shadow: 2px 4px 10px rgba(0,0,0,0.8); }
-        .hero-desc { font-size: 1.3rem; line-height: 1.6; color: #e5e5e5; margin-bottom: 2rem; text-shadow: 1px 1px 5px rgba(0,0,0,0.7); }
-
+        .hero-title { font-size: 4rem; font-family: 'Playfair Display', serif; margin-bottom: 15px; }
         .btn-play {
-            padding: 12px 35px;
-            border: none;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            cursor: pointer;
-            background: white;
-            color: black;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            transition: 0.2s;
+            padding: 12px 35px; border: none; border-radius: 4px; font-weight: bold;
+            font-size: 1.1rem; cursor: pointer; background: white; color: black; transition: 0.2s;
         }
-        .btn-play:hover { background: rgba(255,255,255,0.75); transform: scale(1.05); }
+        .btn-play:hover { background: rgba(255,255,255,0.8); transform: scale(1.05); }
+
+        /* TOP 10 RANKING */
+        .top10-row { padding: 40px 4%; }
+        .top10-container { display: flex; overflow-x: auto; padding: 20px 0; scrollbar-width: none; }
+        .top10-container::-webkit-scrollbar { display: none; }
+        .top10-card { display: flex; align-items: center; min-width: 300px; margin-right: 40px; transition: 0.4s; }
+        .top10-number { 
+            font-size: 10rem; font-family: 'Archivo Black', sans-serif; color: black; 
+            -webkit-text-stroke: 2px #777; margin-right: -25px; z-index: 1; 
+        }
+        .top10-img { width: 150px; height: 210px; object-fit: cover; border-radius: 4px; z-index: 2; box-shadow: 0 0 15px rgba(0,0,0,0.5); }
 
         /* ROWS */
-        .row { padding: 40px 0 10px 4%; }
-        .row-title { font-size: 1.6rem; margin-bottom: 15px; font-weight: bold; color: #e5e5e5; }
-        
-        .row-posters {
-            display: flex;
-            overflow-x: scroll;
-            padding: 20px 0;
-            scrollbar-width: none;
-        }
-        .row-posters::-webkit-scrollbar { display: none; }
+        .row { padding: 20px 4%; }
+        .row-posters { display: flex; gap: 15px; overflow-x: auto; padding: 15px 0; scrollbar-width: none; }
+        .poster { min-width: 240px; height: 135px; border-radius: 4px; overflow: hidden; background: #222; transition: 0.3s; }
+        .poster:hover { transform: scale(1.05); }
+        .poster img { width: 100%; height: 100%; object-fit: cover; }
 
-        .poster-card {
-            min-width: 340px;
-            background: var(--card-bg);
-            margin-right: 20px;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            position: relative;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+        /* SLIDESHOW MODAL */
+        #playModal {
+            display: none; position: fixed; inset: 0; z-index: 5000;
+            background: rgba(0,0,0,0.95); align-items: center; justify-content: center; flex-direction: column;
         }
-        
-        .poster-card:hover { transform: scale(1.1); z-index: 100; box-shadow: 0 15px 40px rgba(0,0,0,0.9); }
-        .poster-card img { width: 100%; height: 190px; object-fit: cover; }
-        
-        /* Rating and Card Info */
-        .card-controls { padding: 15px; background: #181818; }
-        .rating-btns { display: flex; gap: 12px; margin-bottom: 12px; }
+        #slideshowImg { max-width: 85%; max-height: 75vh; border-radius: 8px; border: 3px solid var(--v-pink); animation: fadeEffect 3s infinite; }
+        .close-btn { position: absolute; top: 30px; right: 40px; font-size: 45px; cursor: pointer; color: white; }
+        #slideshowText { margin-top: 20px; font-size: 1.5rem; font-family: 'Playfair Display', serif; color: white; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
 
-        .rate-btn {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid #555;
-            color: white;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: 0.3s;
+        @keyframes fadeEffect {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
         }
 
-        .rate-btn:hover { border-color: white; transform: scale(1.2); }
-        .rate-btn.liked { background: var(--v-pink); border-color: var(--v-pink); }
+        /* COMING SOON */
+        .coming-soon { padding: 40px 4%; margin: 20px 4%; background: rgba(0,0,0,0.3); border-radius: 20px; }
+        .cs-card { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-top: 10px; border-left: 4px solid var(--netflix-red); }
 
-        .card-info h3 { font-size: 1.1rem; margin-bottom: 6px; }
-        .card-info p { font-size: 0.9rem; color: #aaa; line-height: 1.4; }
-
-        /* VIDEO MODAL */
-        .video-overlay {
-            display: none; 
-            position: fixed; inset: 0; z-index: 5000;
-            background-color: rgba(0,0,0,0.98);
-            align-items: center; justify-content: center;
-        }
-        .modal-content { position: relative; width: 90%; max-width: 1000px; }
-        .modal-content video { width: 100%; border-radius: 8px; box-shadow: 0 0 50px var(--netflix-red); }
-        .close-modal { position: absolute; top: -50px; right: 0; color: white; font-size: 45px; cursor: pointer; }
-
-        /* FINALE SECTIONS */
-        .final-section { padding: 120px 10%; text-align: center; }
-        .final-section h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--netflix-red); margin-bottom: 25px; }
-        .final-section p { font-size: 1.4rem; line-height: 1.9; color: #ddd; max-width: 850px; margin: 0 auto; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        audio { display: none; }
+        footer { text-align: center; padding: 100px 0; opacity: 0.8; }
     </style>
 </head>
-
 <body>
 
 <div id="login-overlay">
-    <div class="profile-gate">
-        <h1>Who's Watching?</h1>
-        <div class="profiles">
-            <div class="profile-card" onclick="showPass()">
-                <div class="profile-img"></div>
-                <p>Boothang & Me</p>
-            </div>
-            <div class="profile-card">
-                <div class="profile-img" style="background: #333; display:flex; align-items:center; justify-content:center; font-size:3rem;">+</div>
-                <p>Add Profile</p>
-            </div>
-        </div>
-
-        <div id="password-prompt">
-            <input type="password" id="password" placeholder="Enter Password">
-        </div>
+    <h1 style="color:white; font-size: 2.5rem; margin-bottom: 30px;">Who's Watching?</h1>
+    <div class="profile-img" onclick="document.getElementById('password-prompt').style.display='block'"></div>
+    <p style="margin-top: 15px; color: #808080; font-size: 1.2rem;">Boothang & Me</p>
+    <div id="password-prompt">
+        <input type="password" id="password" placeholder="Enter Password">
     </div>
 </div>
 
 <div id="main">
     <nav class="navbar">
         <div class="logo">LOVEFLIX</div>
-        <div style="width: 38px; height: 38px; border-radius: 4px; background: url('us27.jpg'); background-size: cover; border: 1px solid #555;"></div>
+        <div class="nav-right">
+            <button class="logout-btn" onclick="logout()">Log Out</button>
+        </div>
     </nav>
 
     <header class="hero">
         <div class="hero-content">
             <h1 class="hero-title">The Day We Met</h1>
-            <p class="hero-desc">We met at work when I was asked to train you. I fell for you instantly, even though you didn’t like my vibe at first 😅. I kept pushing, and one day it worked. The day you left, we went home together — and that’s when everything clicked.</p>
-            <button class="btn-play" onclick="openMovie()"><span>▶</span> Play Our Story</button>
+            <button class="btn-play" onclick="startPlay()">▶ Play Story</button>
         </div>
     </header>
 
-    <div class="row">
-        <h2 class="row-title">Trending Now: Our First Chapters</h2>
-        <div class="row-posters">
-            <div class="poster-card">
-                <img src="us27.jpg">
-                <div class="card-controls">
-                    <div class="rating-btns">
-                        <div class="rate-btn" onclick="this.classList.toggle('liked')">👍</div>
-                        <div class="rate-btn" onclick="this.classList.toggle('liked')">👎</div>
-                    </div>
-                    <div class="card-info"><h3>Our First Date</h3><p>Bowling and exploring. You completely surprised me that day 😍</p></div>
-                </div>
+    <div class="top10-row">
+        <h2 style="margin-bottom: 10px;">Top 10 Memories</h2>
+        <div class="top10-container">
+            <div class="top10-card">
+                <div class="top10-number">1</div>
+                <img src="us21.jpg" class="top10-img">
+                <div style="margin-left:15px;"><h3>The Uber Kiss</h3><p style="color:grey;">Greatest Moment</p></div>
             </div>
-            <div class="poster-card">
-                <img src="us2.webp">
-                <div class="card-controls">
-                    <div class="rating-btns"><div class="rate-btn" onclick="this.classList.toggle('liked')">👍</div><div class="rate-btn" onclick="this.classList.toggle('liked')">👎</div></div>
-                    <div class="card-info"><h3>The Winning Game</h3><p>We laughed and enjoyed every single moment together.</p></div>
-                </div>
+            <div class="top10-card">
+                <div class="top10-number">2</div>
+                <img src="us27.jpg" class="top10-img">
+                <div style="margin-left:15px;"><h3>First Date</h3><p style="color:grey;">Where it began</p></div>
             </div>
-            <div class="poster-card">
-                <img src="us4.jpg">
-                <div class="card-controls">
-                    <div class="rating-btns"><div class="rate-btn" onclick="this.classList.toggle('liked')">👍</div><div class="rate-btn" onclick="this.classList.toggle('liked')">👎</div></div>
-                    <div class="card-info"><h3>The Instant Spark</h3><p>It was surely love at first sight for me.</p></div>
-                </div>
+            <div class="top10-card">
+                <div class="top10-number">3</div>
+                <img src="us20.jpg" class="top10-img">
+                <div style="margin-left:15px;"><h3>Our Song</h3><p style="color:grey;">Romantic Beats</p></div>
             </div>
         </div>
     </div>
 
     <div class="row">
-        <h2 class="row-title">Top Rated: Love & Politics</h2>
+        <h2>Continue Watching</h2>
         <div class="row-posters">
-            <div class="poster-card">
-                <img src="us1.jpg">
-                <div class="card-controls">
-                    <div class="rating-btns"><div class="rate-btn" onclick="this.classList.toggle('liked')">👍</div><div class="rate-btn" onclick="this.classList.toggle('liked')">👎</div></div>
-                    <div class="card-info"><h3>Raila vs Ruto 😅</h3><p>Our first big argument. Stubbornness vs Love.</p></div>
-                </div>
-            </div>
-            <div class="poster-card">
-                <img src="us23.jpg">
-                <div class="card-controls">
-                    <div class="rating-btns"><div class="rate-btn" onclick="this.classList.toggle('liked')">👍</div><div class="rate-btn" onclick="this.classList.toggle('liked')">👎</div></div>
-                    <div class="card-info"><h3>The Morning After</h3><p>Talking it out... and letting love win 🤍</p></div>
-                </div>
-            </div>
+            <div class="poster"><img src="us1.jpg"></div>
+            <div class="poster"><img src="us24.jpg"></div>
+            <div class="poster"><img src="us3.jpg"></div>
+            <div class="poster"><img src="us6.jpg"></div>
         </div>
     </div>
 
-    <div class="row">
-        <h2 class="row-title">Binge-worthy: Just Between Us</h2>
-        <div class="row-posters">
-            <div class="poster-card">
-                <img src="us24.jpg">
-                <div class="card-controls">
-                    <div class="rating-btns"><div class="rate-btn" onclick="this.classList.toggle('liked')">👍</div><div class="rate-btn" onclick="this.classList.toggle('liked')">👎</div></div>
-                    <div class="card-info"><h3>Gossip Sessions 🍵</h3><p>Giving tea and whispering until we laughed too much.</p></div>
-                </div>
-            </div>
-            <div class="poster-card">
-                <img src="us26.jpg">
-                <div class="card-controls">
-                    <div class="rating-btns"><div class="rate-btn" onclick="this.classList.toggle('liked')">👍</div><div class="rate-btn" onclick="this.classList.toggle('liked')">👎</div></div>
-                    <div class="card-info"><h3>"Aki Sisi"</h3><p>Whispering about people at every event we went to.</p></div>
-                </div>
-            </div>
-            <div class="poster-card">
-                <img src="us21.jpg">
-                <div class="card-controls">
-                    <div class="rating-btns"><div class="rate-btn" onclick="this.classList.toggle('liked')">👍</div><div class="rate-btn" onclick="this.classList.toggle('liked')">👎</div></div>
-                    <div class="card-info"><h3>The Uber Kiss</h3><p>One of my absolute top 3 favorite memories.</p></div>
-                </div>
-            </div>
+    <div class="coming-soon">
+        <h2 style="color: var(--netflix-red);">New & Hot</h2>
+        <div class="cs-card">
+            <h3>The Wedding Premiere</h3>
+            <p>Coming to a future near you. Starring us.</p>
+        </div>
+        <div class="cs-card">
+            <h3>Our Next Chapter</h3>
+            <p>More laughter, more tea, and endless love.</p>
         </div>
     </div>
 
-    <div class="row">
-        <h2 class="row-title">Because You Liked "Inside Jokes"</h2>
-        <div class="row-posters">
-            <div class="poster-card">
-                <img src="us25.jpg">
-                <div class="card-controls">
-                    <div class="rating-btns"><div class="rate-btn" onclick="this.classList.toggle('liked')">👍</div><div class="rate-btn" onclick="this.classList.toggle('liked')">👎</div></div>
-                    <div class="card-info"><h3>"Hii ni nini"</h3><p>The makanga joke that never gets old.</p></div>
-                </div>
-            </div>
-            <div class="poster-card">
-                <img src="us20.jpg">
-                <div class="card-controls">
-                    <div class="rating-btns"><div class="rate-btn" onclick="this.classList.toggle('liked')">👍</div><div class="rate-btn" onclick="this.classList.toggle('liked')">👎</div></div>
-                    <div class="card-info"><h3>Wedding Melodies</h3><p>A Thousand Years & Beautiful in White.</p></div>
-                </div>
-            </div>
-            <div class="poster-card">
-                <img src="us3.jpg">
-                <div class="card-controls">
-                    <div class="rating-btns"><div class="rate-btn" onclick="this.classList.toggle('liked')">👍</div><div class="rate-btn" onclick="this.classList.toggle('liked')">👎</div></div>
-                    <div class="card-info"><h3>First Wedding Together</h3><p>Looking sharp for our first ceremony as a pair.</p></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <section class="final-section">
-        <h1>Season Finale: The Proposal</h1>
-        <p>When you accepted to be my girlfriend, you made me the happiest man in the world. I hope I'm doing a great job as your boyfriend so far — I want to spoil you until uchoke babe.</p>
-    </section>
-
-    <section class="final-section" style="background: rgba(0,0,0,0.3); border-radius: 50px; margin: 0 4% 100px;">
-        <h1>A Message To My Star</h1>
-        <p>I will always be thankful that we met. You have changed my life in so many ways. I love and adore you Paul. Happy Valentine's Day!</p>
-    </section>
+    <footer>
+        <h1 style="color: var(--netflix-red); font-size: 2.5rem;">I Love You, Paul.</h1>
+        <p>Your Favorite Movie Partner Forever.</p>
+    </footer>
 </div>
 
-<div id="videoModal" class="video-overlay">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeMovie()">&times;</span>
-        <video id="storyVideo" controls>
-            <source src="our-story.mp4" type="video/mp4">
-        </video>
-    </div>
+<div id="playModal">
+    <span class="close-btn" onclick="stopPlay()">&times;</span>
+    <img id="slideshowImg" src="">
+    <h2 id="slideshowText"></h2>
 </div>
 
-<audio id="music" loop>
-    <source src="song.mp3" type="audio/mpeg">
-</audio>
+<audio id="music" loop><source src="song.mp3" type="audio/mpeg"></audio>
 
 <script>
-    const loginOverlay = document.getElementById("login-overlay");
-    const mainUI = document.getElementById("main");
-    const passPrompt = document.getElementById("password-prompt");
-    const music = document.getElementById("music");
+    // Slideshow Data
+    const images = ["us21.jpg", "us27.jpg", "us20.jpg", "us1.jpg", "us24.jpg", "us25.jpg"];
+    const captions = ["The #1 Ranked Moment: The Kiss", "The Pilot Episode: Our First Date", "The Theme Song: Our Music", "The Dramatic Scenes: Our Debates", "The Binge-worthy Tea & Gossip", "The Comedy Specials: Inside Jokes"];
+    let i = 0;
+    let slideTimer;
 
-    // Profile Screen Logic
-    function showPass() {
-        passPrompt.style.display = "block";
-        document.getElementById("password").focus();
-    }
-
+    // Login logic
     document.getElementById("password").addEventListener("keypress", function(e) {
-        if (e.key === "Enter") {
-            if (this.value === "Boothang43") {
-                loginOverlay.style.display = "none";
-                mainUI.style.display = "block";
-                music.play();
-            } else {
-                alert("Incorrect password, my love!");
-            }
+        if (e.key === "Enter" && this.value === "Boothang43") {
+            document.getElementById("login-overlay").style.display = "none";
+            document.getElementById("main").style.display = "block";
+            document.getElementById("music").play();
         }
     });
 
-    // Playback Logic
-    function openMovie() {
-        document.getElementById("videoModal").style.display = "flex";
-        document.getElementById("storyVideo").play();
-        music.pause();
+    function logout() {
+        document.getElementById("login-overlay").style.display = "flex";
+        document.getElementById("main").style.display = "none";
+        document.getElementById("music").pause();
+        document.getElementById("password").value = "";
+        document.getElementById("password-prompt").style.display = "none";
     }
 
-    function closeMovie() {
-        document.getElementById("videoModal").style.display = "none";
-        document.getElementById("storyVideo").pause();
-        music.play();
+    function startPlay() {
+        document.getElementById("playModal").style.display = "flex";
+        document.getElementById("music").pause();
+        runSlide();
+        slideTimer = setInterval(runSlide, 3500);
     }
 
-    // Valentine Magic: Floating Hearts
+    function runSlide() {
+        const img = document.getElementById("slideshowImg");
+        const txt = document.getElementById("slideshowText");
+        img.src = images[i];
+        txt.innerHTML = captions[i];
+        i = (i + 1) % images.length;
+    }
+
+    function stopPlay() {
+        document.getElementById("playModal").style.display = "none";
+        clearInterval(slideTimer);
+        document.getElementById("music").play();
+    }
+
+    // Floating Hearts Magic
     setInterval(() => {
-        if (mainUI.style.display === "block") {
-            const heart = document.createElement('div');
-            heart.innerHTML = '❤️';
-            heart.style.position = 'fixed';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.bottom = '-5%';
-            heart.style.zIndex = '999';
-            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-            heart.style.transition = '4s linear';
-            heart.style.opacity = '0.8';
-            document.body.appendChild(heart);
-
-            setTimeout(() => {
-                heart.style.transform = `translateY(-110vh) rotate(${Math.random() * 360}deg)`;
-                heart.style.opacity = '0';
-            }, 100);
-
-            setTimeout(() => heart.remove(), 4000);
+        if(document.getElementById("main").style.display === "block"){
+            const h = document.createElement('div');
+            h.innerHTML = '❤️';
+            h.style.position = 'fixed';
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.bottom = '-20px';
+            h.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            h.style.transition = '5s linear';
+            h.style.zIndex = "2000";
+            document.body.appendChild(h);
+            setTimeout(() => { h.style.transform = 'translateY(-110vh) rotate(360deg)'; h.style.opacity = '0'; }, 100);
+            setTimeout(() => h.remove(), 5000);
         }
-    }, 700);
+    }, 800);
 </script>
-
 </body>
 </html>
