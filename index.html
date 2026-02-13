@@ -4,202 +4,248 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOVEFLIX | Our Forever Story</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&family=Archivo+Black&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --netflix-red: #E50914;
-            --dark-bg: #141414;
-            --gray-text: #bcbcbc;
+            --bg-black: #141414;
+            --card-hover-scale: 1.1;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--dark-bg);
+            background-color: var(--bg-black);
             color: white;
             font-family: 'Roboto', sans-serif;
-            overflow-x: hidden;
-            padding-bottom: 80px;
+            overflow-x: hidden; /* Prevent horizontal scroll on body */
+            padding-bottom: 50px;
         }
 
-        /* --- LOGIN SCREEN --- */
+        /* --- LOGIN OVERLAY --- */
         #login-overlay {
-            position: fixed; inset: 0; background: black; z-index: 3000;
+            position: fixed; inset: 0; background: black; z-index: 5000;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
+        .profile-container { text-align: center; animation: fadeIn 1s ease; }
         .profile-img {
             width: 150px; height: 150px; border-radius: 4px;
             background: url('us1.jpg') center/cover;
             border: 3px solid transparent; cursor: pointer; transition: 0.3s;
-            background-color: #333;
+            margin-bottom: 15px;
         }
         .profile-img:hover { border-color: white; transform: scale(1.05); }
-        #password-prompt { display: none; margin-top: 20px; text-align: center; }
+        .profile-name { color: #808080; font-size: 1.2rem; transition: 0.3s; }
+        .profile-container:hover .profile-name { color: white; }
+        
+        #password-prompt { display: none; margin-top: 20px; }
         #password-prompt input {
-            padding: 10px; border-radius: 4px; border: none; text-align: center; font-size: 1rem;
+            padding: 10px 20px; border: 1px solid #333; background: #333; color: white;
+            font-size: 1.2rem; outline: none; text-align: center;
         }
 
-        /* --- NAVIGATION --- */
-        #main { display: none; }
-        
+        /* --- NAVBAR --- */
         .navbar {
-            padding: 15px 4%; position: fixed; width: 100%; top:0; z-index: 100;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 20px 4%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 10%, transparent);
             display: flex; justify-content: space-between; align-items: center;
+            transition: 0.5s;
         }
-        .logo { color: var(--netflix-red); font-family: 'Archivo Black', sans-serif; font-size: 2rem; text-decoration: none; }
+        .logo {
+            color: var(--netflix-red); font-family: 'Bebas Neue', sans-serif; 
+            font-size: 2.5rem; text-decoration: none; letter-spacing: 2px;
+            text-shadow: 0px 0px 10px rgba(229, 9, 20, 0.7);
+        }
         .logout-btn {
-            background: var(--netflix-red); color: white; border: none; padding: 8px 15px;
-            border-radius: 4px; font-weight: bold; cursor: pointer;
+            background: transparent; color: white; border: 1px solid white; 
+            padding: 5px 15px; font-weight: bold; cursor: pointer; transition: 0.2s;
         }
+        .logout-btn:hover { background: white; color: black; }
 
-        /* --- HERO --- */
+        /* --- HERO SECTION --- */
         .hero {
-            height: 80vh;
-            background: linear-gradient(to right, rgba(0,0,0,0.8) 20%, transparent), url('us1.jpg') center/cover;
-            display: flex; align-items: center; padding: 0 4%; margin-bottom: 20px;
+            position: relative; height: 85vh; width: 100%;
+            background: url('us1.jpg') center center/cover no-repeat;
+            margin-bottom: -50px; /* Pull rows up slightly */
         }
-        .hero-content { max-width: 650px; margin-top: 60px; }
-        .hero-title { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 15px; }
-        .hero-desc { font-size: 1.1rem; line-height: 1.5; margin-bottom: 20px; text-shadow: 2px 2px 4px black; color: #ddd; }
+        /* Cinematic Vignette */
+        .hero::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to top, var(--bg-black) 10%, transparent 60%),
+                        linear-gradient(to right, rgba(0,0,0,0.8) 0%, transparent 50%);
+        }
         
-        .btn-play {
-            padding: 10px 25px; background: white; color: black; border: none; border-radius: 4px;
-            font-size: 1.1rem; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 10px;
+        .hero-content {
+            position: absolute; bottom: 35%; left: 4%; z-index: 10;
+            max-width: 600px;
+        }
+        .hero-title {
+            font-family: 'Bebas Neue', sans-serif; font-size: 5rem; 
+            line-height: 0.9; margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        .hero-desc {
+            font-size: 1.2rem; color: #fff; margin-bottom: 25px; 
+            text-shadow: 1px 1px 2px black; font-weight: 400;
+        }
+        .btn-row { display: flex; gap: 15px; }
+        .btn {
+            padding: 12px 30px; border-radius: 4px; font-size: 1.2rem; font-weight: bold;
+            border: none; cursor: pointer; display: flex; align-items: center; gap: 10px;
             transition: 0.2s;
         }
-        .btn-play:hover { background: rgba(255,255,255,0.8); }
+        .btn-white { background: white; color: black; }
+        .btn-white:hover { background: rgba(255, 255, 255, 0.75); }
+        .btn-gray { background: rgba(109, 109, 110, 0.7); color: white; }
+        .btn-gray:hover { background: rgba(109, 109, 110, 0.4); }
 
-        /* --- ROWS & CARDS --- */
-        .row { padding: 20px 4%; }
-        .row h2 { margin-bottom: 10px; font-size: 1.4rem; color: #e5e5e5; }
+        /* --- ROW STYLES --- */
+        .row { margin: 3vw 0; padding-left: 4%; position: relative; z-index: 20; }
+        .row h2 {
+            font-size: 1.4vw; color: #e5e5e5; font-weight: 700; 
+            margin-bottom: 0.5em; text-transform: capitalize;
+        }
         
         .row-scroller {
-            display: flex; overflow-x: auto; gap: 10px; padding-bottom: 20px; 
+            display: flex; overflow-x: auto; overflow-y: hidden;
+            gap: 10px; padding: 20px 0;
             scrollbar-width: none; -webkit-overflow-scrolling: touch;
         }
         .row-scroller::-webkit-scrollbar { display: none; }
 
         .card {
-            min-width: 200px; height: 120px; border-radius: 4px; cursor: pointer;
-            position: relative; overflow: hidden; transition: 0.3s;
-            background: #222;
-            flex-shrink: 0;
+            flex: 0 0 auto; width: 200px; height: 115px;
+            border-radius: 4px; cursor: pointer; transition: transform 0.3s ease;
+            position: relative; overflow: hidden;
         }
-        /* Top 10 cards are bigger */
-        .card.big { min-width: 160px; height: 220px; }
+        .card img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
+        .card:hover { transform: scale(var(--card-hover-scale)); z-index: 99; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
         
-        .card:hover { transform: scale(1.05); z-index: 10; }
-        
-        .card img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .rank-num {
-            position: absolute; left: -15px; bottom: 0; font-size: 7rem; font-family: 'Archivo Black';
-            color: black; -webkit-text-stroke: 2px #555; line-height: 0.8; z-index: 1;
-        }
-        .card.big img { position: relative; z-index: 2; margin-left: 15px; width: calc(100% - 15px); }
-
         .card-title {
-            position: absolute; bottom: 0; left: 0; width: 100%; padding: 5px 10px;
-            background: linear-gradient(transparent, black); font-size: 0.8rem; font-weight: bold; z-index: 5;
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 10px; font-size: 0.8rem; text-align: center;
+            opacity: 0; transition: 0.3s;
+        }
+        .card:hover .card-title { opacity: 1; }
+
+        /* --- TOP 10 SPECIFIC STYLES --- */
+        .top10-container {
+            display: flex; align-items: center; position: relative;
+            /* Top 10 cards are taller */
+            height: 200px; width: 220px; flex: 0 0 auto;
+            margin-right: 40px; cursor: pointer; transition: 0.3s;
+        }
+        .top10-container:hover { transform: scale(1.1); z-index: 50; }
+
+        .big-number {
+            font-family: 'Bebas Neue', sans-serif; font-size: 14rem; 
+            line-height: 1; position: absolute; left: -20px; bottom: 0;
+            color: black; -webkit-text-stroke: 4px #595959; text-shadow: 2px 2px 4px black;
+            z-index: 1; pointer-events: none;
+        }
+        .top10-img {
+            position: absolute; right: 0; top: 0; bottom: 0;
+            width: 140px; height: 200px; object-fit: cover; z-index: 2;
+            border-radius: 4px;
         }
 
-        /* --- MODAL (STORY + LIKES/COMMENTS) --- */
+        /* --- MODALS --- */
         #contextModal, #slideshowModal {
-            display: none; position: fixed; inset: 0; z-index: 2000;
-            background: rgba(0,0,0,0.95); align-items: center; justify-content: center;
+            display: none; position: fixed; inset: 0; z-index: 6000;
+            background: rgba(0,0,0,0.8); align-items: center; justify-content: center;
+            animation: fadeIn 0.3s;
         }
+        
+        /* Story Modal - Pop-up style */
         .modal-box {
-            background: #181818; width: 95%; max-width: 600px; border-radius: 8px;
-            overflow: hidden; position: relative; max-height: 90vh; overflow-y: auto;
-            display: flex; flex-direction: column;
+            background: #181818; width: 90%; max-width: 800px; border-radius: 10px;
+            overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-height: 90vh; overflow-y: auto;
         }
-        .modal-img-container { position: relative; width: 100%; height: 300px; }
-        .modal-img { width: 100%; height: 100%; object-fit: cover; }
+        .modal-hero { width: 100%; height: 350px; object-fit: cover; }
+        .modal-content { padding: 30px; }
         
-        .modal-content { padding: 20px; }
-        .modal-meta { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .modal-meta { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .match-score { color: #46d369; font-weight: bold; }
+        .age-rating { border: 1px solid white; padding: 0 5px; font-size: 0.8rem; }
         
-        .action-btn { 
-            background: transparent; border: 1px solid #555; color: white; 
-            padding: 5px 15px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 5px;
+        .action-row { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 20px; }
+        .circle-btn {
+            background: rgba(42,42,42,0.6); border: 2px solid rgba(255,255,255,0.7);
+            width: 40px; height: 40px; border-radius: 50%; color: white;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
         }
-        .action-btn.liked { border-color: var(--netflix-red); color: var(--netflix-red); }
+        .circle-btn:hover { border-color: white; background: white; color: black; }
         
-        .comments-section { margin-top: 20px; border-top: 1px solid #333; padding-top: 15px; }
-        .comment-input { 
-            width: 100%; background: #333; border: none; padding: 10px; 
-            color: white; border-radius: 4px; margin-bottom: 10px; 
+        /* Comments */
+        .comments-box { margin-top: 10px; }
+        .comment-input {
+            width: 100%; background: #000; border: 1px solid #333; padding: 10px;
+            color: white; margin-bottom: 10px; border-radius: 4px;
         }
-        .comment-list { font-size: 0.9rem; color: var(--gray-text); max-height: 100px; overflow-y: auto; }
-        .comment-item { margin-bottom: 8px; border-bottom: 1px solid #222; padding-bottom: 5px; }
+        .comment-list { font-size: 0.9rem; color: #999; }
+        .comment { padding: 5px 0; border-bottom: 1px solid #222; }
 
-        .close-btn {
-            position: absolute; top: 10px; right: 10px; background: black;
-            color: white; width: 30px; height: 30px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10;
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* --- SLIDESHOW --- */
-        #slideImg { max-width: 100%; max-height: 100vh; object-fit: contain; }
-
-        /* Error handling for broken images */
-        img[alt]:after {  
-            display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background-color: #222; color: #666; content: 'Image Loading...'; 
-            font-size: 10px; padding: 10px;
-        }
     </style>
 </head>
 <body>
 
 <div id="login-overlay">
-    <h1 style="margin-bottom: 20px; font-size: 2.5rem;">Who's Watching?</h1>
-    <div class="profile-img" onclick="document.getElementById('password-prompt').style.display='block'"></div>
-    <p style="margin-top: 10px; color: grey;">Boothang & Me</p>
+    <div class="profile-container" onclick="document.getElementById('password-prompt').style.display='block'">
+        <div class="profile-img"></div>
+        <div class="profile-name">Boothang & Me</div>
+    </div>
     <div id="password-prompt">
-        <input type="password" id="password" placeholder="Enter Password">
+        <input type="password" id="password" placeholder="Password (Boothang43)" autofocus>
     </div>
 </div>
 
 <div id="main">
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <a href="#" class="logo">LOVEFLIX</a>
         <button class="logout-btn" onclick="logout()">Log Out</button>
     </nav>
 
-    <header class="hero">
+    <div class="hero">
         <div class="hero-content">
-            <h1 class="hero-title">The Day We Met</h1>
-            <p class="hero-desc">We met at work. I fell for you instantly. I kept pushing, and one day it worked. The rest is history.</p>
-            <button class="btn-play" onclick="startSlideshow()">▶ Play All Photos</button>
-            <button class="btn-play" style="background: rgba(109, 109, 110, 0.7); color: white; margin-left: 10px;" onclick="openStory('intro')">ℹ More Info</button>
+            <h1 class="hero-title">THE DAY WE MET</h1>
+            <p class="hero-desc">
+                We met at work. I fell for you instantly. I kept pushing, and one day it worked. The day you left, we went home together — and that’s when everything clicked.
+            </p>
+            <div class="btn-row">
+                <button class="btn btn-white" onclick="startSlideshow()">▶ Play</button>
+                <button class="btn btn-gray" onclick="openStory('intro')">ℹ More Info</button>
+            </div>
         </div>
-    </header>
+    </div>
 
-    <div class="row">
-        <h2>Top Memories</h2>
+    <div class="row" style="margin-top: -50px; position: relative; z-index: 50;">
+        <h2>Top 10 Memories Today</h2>
         <div class="row-scroller">
-            <div class="card big" onclick="openStory('page7')">
-                <div class="rank-num">1</div>
-                <img src="us21.jpg" alt="Check us21.jpg">
+            <div class="top10-container" onclick="openStory('page7')">
+                <div class="big-number">1</div>
+                <img src="us21.jpg" class="top10-img">
             </div>
-            <div class="card big" onclick="openStory('page3')">
-                <div class="rank-num">2</div>
-                <img src="us27.jpg" alt="Check us27.jpg">
+            <div class="top10-container" onclick="openStory('page3')">
+                <div class="big-number">2</div>
+                <img src="us27.jpg" class="top10-img">
             </div>
-            <div class="card big" onclick="openStory('page10')">
-                <div class="rank-num">3</div>
-                <img src="us3.jpg" alt="Check us3.jpg">
+            <div class="top10-container" onclick="openStory('page10')">
+                <div class="big-number">3</div>
+                <img src="us3.jpg" class="top10-img">
             </div>
-            <div class="card big" onclick="openStory('page4')">
-                <div class="rank-num">4</div>
-                <img src="us4.jpg" alt="Check us4.jpg">
+            <div class="top10-container" onclick="openStory('page4')">
+                <div class="big-number">4</div>
+                <img src="us4.jpg" class="top10-img">
             </div>
         </div>
     </div>
 
     <div class="row">
-        <h2>The Series</h2>
+        <h2>Season 1: The Beginning</h2>
         <div class="row-scroller">
             <div class="card" onclick="openStory('page3')">
                 <img src="us27.jpg" loading="lazy">
@@ -213,6 +259,12 @@
                 <img src="us1.jpg" loading="lazy">
                 <div class="card-title">Ups & Downs</div>
             </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <h2>Season 2: Growing Stronger</h2>
+        <div class="row-scroller">
             <div class="card" onclick="openStory('page6')">
                 <img src="us24.jpg" loading="lazy">
                 <div class="card-title">Just Between Us</div>
@@ -225,6 +277,12 @@
                 <img src="us25.jpg" loading="lazy">
                 <div class="card-title">Inside Jokes</div>
             </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <h2>Season 3: Forever</h2>
+        <div class="row-scroller">
             <div class="card" onclick="openStory('page9')">
                 <img src="us20.jpg" loading="lazy">
                 <div class="card-title">Our Melody</div>
@@ -237,7 +295,7 @@
     </div>
 
     <div class="row">
-        <h2>Continue Watching</h2>
+        <h2>Because You Watched "Us"</h2>
         <div class="row-scroller">
             <div class="card" onclick="startSlideshowFrom(11)"><img src="us12.jpg" loading="lazy"></div>
             <div class="card" onclick="startSlideshowFrom(12)"><img src="us13.jpg" loading="lazy"></div>
@@ -249,31 +307,35 @@
 
 <div id="contextModal">
     <div class="modal-box">
-        <div class="close-btn" onclick="document.getElementById('contextModal').style.display='none'">&times;</div>
-        
-        <div class="modal-img-container">
-            <img id="modalImg" class="modal-img" src="">
+        <div style="position: relative;">
+            <img id="modalHero" class="modal-hero" src="">
+            <div class="close-btn" onclick="document.getElementById('contextModal').style.display='none'" style="position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.5); width: 30px; height: 30px; border-radius: 50%; text-align: center; line-height: 30px; cursor: pointer;">&times;</div>
         </div>
-
+        
         <div class="modal-content">
-            <h2 id="modalTitle" style="color: var(--netflix-red); margin-bottom: 10px;"></h2>
-            <p id="modalDesc" style="color: #ccc; line-height: 1.5; margin-bottom: 20px;"></p>
+            <h2 id="modalTitle" style="font-family: 'Bebas Neue'; letter-spacing: 1px;"></h2>
             
             <div class="modal-meta">
-                <button class="action-btn" id="likeBtn" onclick="toggleLike()">
-                    <span>❤️</span> <span id="likeText">Like</span>
-                </button>
-                <span style="color: grey; font-size: 0.9rem;">98% Match</span>
-                <span style="color: grey; font-size: 0.9rem;">2024</span>
+                <span class="match-score">99% Match</span>
+                <span style="color: #bcbcbc;">2024</span>
+                <span class="age-rating">18+</span>
+                <span style="color: #bcbcbc;">1 Season</span>
             </div>
 
-            <div class="comments-section">
-                <h4 style="margin-bottom: 10px;">Comments</h4>
+            <p id="modalDesc" style="color: white; line-height: 1.5; margin-bottom: 20px; font-size: 1rem;"></p>
+
+            <div class="action-row">
+                <div class="circle-btn" id="likeBtn" onclick="toggleLike()">❤️</div>
+                <div style="color: #999; align-self: center; font-size: 0.9rem;">Rate this memory</div>
+            </div>
+
+            <div class="comments-box">
+                <h4 style="color: #e5e5e5; margin-bottom: 10px;">Comments</h4>
                 <div id="commentList" class="comment-list">
                     </div>
                 <div style="display: flex; gap: 10px; margin-top: 10px;">
-                    <input type="text" id="commentInput" class="comment-input" placeholder="Add a comment...">
-                    <button onclick="addComment()" style="background: white; border: none; padding: 0 15px; border-radius: 4px; font-weight: bold; cursor: pointer;">Post</button>
+                    <input type="text" id="commentInput" class="comment-input" placeholder="Say something nice...">
+                    <button onclick="postComment()" style="background: white; color: black; border: none; padding: 0 15px; font-weight: bold; cursor: pointer;">Post</button>
                 </div>
             </div>
         </div>
@@ -281,78 +343,52 @@
 </div>
 
 <div id="slideshowModal" onclick="stopSlideshow()">
-    <img id="slideImg" src="">
+    <img id="slideImg" style="max-width: 100%; max-height: 100vh; object-fit: contain;">
 </div>
 
 <audio id="music" loop><source src="song.mp3" type="audio/mpeg"></audio>
 
 <script>
-    // --- STORY DATABASE (Mapped to your requested Pages) ---
+    // --- STORY DATABASE ---
     const db = {
-        'intro': { 
-            title: "The Day We Met", 
-            img: "us1.jpg", 
-            text: "We met at work. I fell for you instantly. I kept pushing, and one day it worked." 
-        },
-        'page3': { 
-            title: "Page 3: Our First Date", 
-            img: "us27.jpg", // Primary
-            text: "We went bowling, did a little shopping, and explored together. I was excited and nervous at first, but it turned into such a fun day. (Featuring: us27.jpg, us2.jpg)" 
-        },
-        'page4': { 
-            title: "Page 4: Our Journey", 
-            img: "us4.jpg", 
-            text: "We met at work… and the spark was instant. For me it was surely love at first sight. (Featuring: us4.jpg, us5.jpg)" 
-        },
-        'page5': { 
-            title: "Page 5: Ups & Downs", 
-            img: "us1.jpg", 
-            text: "Do you remember our first big argument? Raila vs Ruto. We slept mad but woke up and solved it. Love always wins. (Featuring: us1.jpg, us23.jpg)" 
-        },
-        'page6': { 
-            title: "Page 6: Just Between Us", 
-            img: "us24.jpg", 
-            text: "Gossiping everywhere we go. 'Ntakuja kupigwa one day'. Always giving tea. (Featuring: us24.jpg, us26.jpg)" 
-        },
-        'page7': { 
-            title: "Page 7: Favorite Moments", 
-            img: "us21.jpg", 
-            text: "The kiss in the Uber. Bowling. December holidays. These are the moments I live for. (Featuring: us21.jpg, us6.jpg)" 
-        },
-        'page8': { 
-            title: "Page 8: Inside Jokes", 
-            img: "us25.jpg", 
-            text: "Our humor is unique. It's what bonds us together. (Featuring: us25.jpg, us10.jpg)" 
-        },
-        'page9': { 
-            title: "Page 9: Our Melody", 
-            img: "us20.jpg", 
-            text: "Beautiful in White. A Thousand Years. The soundtrack of our lives. (Featuring: us20.jpg, us14.jpg, us22.jpg)" 
-        },
-        'page10': { 
-            title: "Page 10: Our First Wedding", 
-            img: "us3.jpg", 
-            text: "Attending our first ceremony together. We looked amazing. (Featuring: us3.jpg, us28.jpg)" 
-        }
+        'intro': { title: "The Day We Met", img: "us1.jpg", text: "We met at work. I fell for you instantly. I kept pushing, and one day it worked." },
+        
+        // Page 3: First Date (us27, us2)
+        'page3': { title: "Our First Date", img: "us27.jpg", text: "We went bowling, did a little shopping, and explored together. I was excited and nervous at first, but it turned into such a fun day. (Also featuring: us2.jpg)" },
+        
+        // Page 4: Journey (us4, us5)
+        'page4': { title: "Our Journey", img: "us4.jpg", text: "We met at work… and the spark was instant. For me it was surely love at first sight. (Also featuring: us5.jpg)" },
+        
+        // Page 5: Ups & Downs (us1, us23)
+        'page5': { title: "Ups & Downs", img: "us1.jpg", text: "Do you remember our first big argument? Raila vs Ruto. We slept mad but woke up and solved it. Love always wins. (Also featuring: us23.jpg)" },
+        
+        // Page 6: Just Between Us (us24, us26)
+        'page6': { title: "Just Between Us", img: "us24.jpg", text: "Gossiping everywhere we go. 'Ntakuja kupigwa one day'. Always giving tea. (Also featuring: us26.jpg)" },
+        
+        // Page 7: Favorite Moments (us21, us6)
+        'page7': { title: "Favorite Moments", img: "us21.jpg", text: "The kiss in the Uber. Bowling. December holidays. These are the moments I live for. (Also featuring: us6.jpg)" },
+        
+        // Page 8: Inside Jokes (us25, us10)
+        'page8': { title: "Inside Jokes", img: "us25.jpg", text: "Our humor is unique. It's what bonds us together. (Also featuring: us10.jpg)" },
+        
+        // Page 9: Melody (us20, us14, us22)
+        'page9': { title: "Our Melody", img: "us20.jpg", text: "Beautiful in White. A Thousand Years. The soundtrack of our lives. (Also featuring: us14.jpg, us22.jpg)" },
+        
+        // Page 10: Wedding (us3, us28)
+        'page10': { title: "Our First Wedding", img: "us3.jpg", text: "Attending our first ceremony together. We looked amazing. (Also featuring: us28.jpg)" }
     };
 
-    // --- SLIDESHOW ARRAY (Expanded to 30) ---
-    const allImages = [];
-    for(let i=1; i<=30; i++) {
-        // Handle the webp exception if needed, otherwise jpg
-        if(i === 2) allImages.push("us2.webp");
-        else allImages.push(`us${i}.jpg`);
-    }
-
-    // --- CURRENT STATE ---
-    let currentStoryKey = null;
-
-    // --- LOGIN LOGIC ---
+    // --- GLOBAL VARIABLES ---
+    let currentKey = null;
+    let slideIndex = 0;
+    let slideInterval;
+    
+    // --- LOGIN ---
     document.getElementById("password").addEventListener("keypress", function(e) {
         if (e.key === "Enter" && this.value === "Boothang43") {
             document.getElementById("login-overlay").style.display = "none";
             document.getElementById("main").style.display = "block";
-            document.getElementById("music").play().catch(e => console.log("Auto-play blocked"));
+            document.getElementById("music").play().catch(e => console.log("Music blocked"));
         }
     });
 
@@ -365,61 +401,33 @@
 
     // --- STORY MODAL LOGIC ---
     function openStory(key) {
-        currentStoryKey = key;
+        currentKey = key;
         const data = db[key];
         if(!data) return;
 
-        document.getElementById("modalImg").src = data.img;
+        document.getElementById("modalHero").src = data.img;
         document.getElementById("modalTitle").innerText = data.title;
         document.getElementById("modalDesc").innerText = data.text;
         
-        // Reset Comments & Likes for view (Visual simulation)
+        // Load Comments & Likes
         loadComments(key);
-        resetLike(key);
+        updateLikeBtn(key);
         
         document.getElementById("contextModal").style.display = "flex";
     }
 
-    // --- LIKE SYSTEM ---
-    function toggleLike() {
-        const btn = document.getElementById("likeBtn");
-        const isLiked = btn.classList.contains("liked");
-        
-        if (isLiked) {
-            btn.classList.remove("liked");
-            btn.innerHTML = `<span>❤️</span> <span>Like</span>`;
-            localStorage.setItem(currentStoryKey + "_liked", "false");
-        } else {
-            btn.classList.add("liked");
-            btn.innerHTML = `<span>❤️</span> <span>Liked!</span>`;
-            localStorage.setItem(currentStoryKey + "_liked", "true");
-        }
-    }
-
-    function resetLike(key) {
-        const btn = document.getElementById("likeBtn");
-        if (localStorage.getItem(key + "_liked") === "true") {
-            btn.classList.add("liked");
-            btn.innerHTML = `<span>❤️</span> <span>Liked!</span>`;
-        } else {
-            btn.classList.remove("liked");
-            btn.innerHTML = `<span>❤️</span> <span>Like</span>`;
-        }
-    }
-
-    // --- COMMENT SYSTEM ---
-    function addComment() {
+    // --- COMMENTS ---
+    function postComment() {
         const input = document.getElementById("commentInput");
-        const text = input.value.trim();
-        if (!text) return;
+        const txt = input.value.trim();
+        if(!txt) return;
 
-        // Save to LocalStorage
-        let comments = JSON.parse(localStorage.getItem(currentStoryKey + "_comments") || "[]");
-        comments.push({ text: text, time: "Just now" });
-        localStorage.setItem(currentStoryKey + "_comments", JSON.stringify(comments));
-
+        let comments = JSON.parse(localStorage.getItem(currentKey + "_comments") || "[]");
+        comments.push(txt);
+        localStorage.setItem(currentKey + "_comments", JSON.stringify(comments));
+        
         input.value = "";
-        loadComments(currentStoryKey);
+        loadComments(currentKey);
     }
 
     function loadComments(key) {
@@ -427,21 +435,45 @@
         list.innerHTML = "";
         let comments = JSON.parse(localStorage.getItem(key + "_comments") || "[]");
         
-        if (comments.length === 0) {
-            list.innerHTML = "<div class='comment-item'><i>No comments yet. Be the first!</i></div>";
+        if(comments.length === 0) {
+            list.innerHTML = "<div class='comment'><i>No comments yet.</i></div>";
         } else {
             comments.forEach(c => {
                 const div = document.createElement("div");
-                div.className = "comment-item";
-                div.innerHTML = `<strong>You:</strong> ${c.text}`;
+                div.className = "comment";
+                div.innerText = "You: " + c;
                 list.appendChild(div);
             });
         }
     }
 
-    // --- SLIDESHOW LOGIC ---
-    let slideIndex = 0;
-    let slideInterval;
+    // --- LIKES ---
+    function toggleLike() {
+        const isLiked = localStorage.getItem(currentKey + "_liked") === "true";
+        localStorage.setItem(currentKey + "_liked", !isLiked);
+        updateLikeBtn(currentKey);
+    }
+
+    function updateLikeBtn(key) {
+        const btn = document.getElementById("likeBtn");
+        const isLiked = localStorage.getItem(key + "_liked") === "true";
+        if(isLiked) {
+            btn.style.background = "white";
+            btn.style.color = "red";
+            btn.innerText = "❤️"; // Or specific icon
+        } else {
+            btn.style.background = "rgba(42,42,42,0.6)";
+            btn.style.color = "white";
+            btn.innerText = "♡";
+        }
+    }
+
+    // --- SLIDESHOW ---
+    // Generates list us1.jpg to us30.jpg (Handling us2.jpg as standard)
+    const allImages = [];
+    for(let i=1; i<=30; i++) {
+        allImages.push(`us${i}.jpg`);
+    }
 
     function startSlideshow() {
         slideIndex = 0;
@@ -449,9 +481,9 @@
         showSlide();
         slideInterval = setInterval(nextSlide, 2500);
     }
-    
+
     function startSlideshowFrom(idx) {
-        slideIndex = idx; 
+        slideIndex = idx;
         document.getElementById("slideshowModal").style.display = "flex";
         showSlide();
         slideInterval = setInterval(nextSlide, 2500);
@@ -470,6 +502,14 @@
         document.getElementById("slideshowModal").style.display = "none";
         clearInterval(slideInterval);
     }
+
+    // Navbar transparency effect
+    window.addEventListener("scroll", () => {
+        const nav = document.getElementById("navbar");
+        if(window.scrollY > 50) nav.style.background = "#141414";
+        else nav.style.background = "linear-gradient(to bottom, rgba(0,0,0,0.7) 10%, transparent)";
+    });
+
 </script>
 </body>
 </html>
