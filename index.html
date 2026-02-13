@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOVEFLIX | Our Forever Story</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>LOVEFLIX | Sign In</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --netflix-red: #E50914;
             --bg-black: #141414;
-            --card-hover-scale: 1.1;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -17,31 +16,84 @@
             background-color: var(--bg-black);
             color: white;
             font-family: 'Roboto', sans-serif;
-            overflow-x: hidden; /* Prevent horizontal scroll on body */
-            padding-bottom: 50px;
+            overflow-x: hidden;
         }
 
-        /* --- LOGIN OVERLAY --- */
+        /* --- REAL NETFLIX LOGIN PAGE STYLES --- */
         #login-overlay {
-            position: fixed; inset: 0; background: black; z-index: 5000;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            position: fixed; inset: 0; z-index: 5000;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            /* Background Image with Dark Overlay */
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('us1.jpg');
+            background-size: cover; background-position: center;
         }
-        .profile-container { text-align: center; animation: fadeIn 1s ease; }
-        .profile-img {
-            width: 150px; height: 150px; border-radius: 4px;
-            background: url('us1.jpg') center/cover;
-            border: 3px solid transparent; cursor: pointer; transition: 0.3s;
-            margin-bottom: 15px;
+        /* Top Left Logo on Login Screen */
+        .login-logo {
+            position: absolute; top: 25px; left: 40px;
+            color: var(--netflix-red); font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem; text-decoration: none; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
-        .profile-img:hover { border-color: white; transform: scale(1.05); }
-        .profile-name { color: #808080; font-size: 1.2rem; transition: 0.3s; }
-        .profile-container:hover .profile-name { color: white; }
+
+        /* The Central Login Card */
+        .login-card {
+            background: rgba(0, 0, 0, 0.75); /* Semi-transparent black */
+            padding: 60px 68px 40px;
+            border-radius: 4px;
+            width: 100%; max-width: 450px;
+            min-height: 500px;
+            display: flex; flex-direction: column;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .login-card h1 {
+            color: white; font-size: 2rem; font-weight: 700; margin-bottom: 28px;
+        }
+
+        .input-group { position: relative; margin-bottom: 16px; }
+
+        .login-input {
+            width: 100%; background: #333; border: none; border-radius: 4px;
+            color: white; height: 50px; padding: 16px 20px 0; /* Space for floating label */
+            font-size: 1rem; outline: none;
+        }
+        .login-input:focus { background: #454545; }
         
-        #password-prompt { display: none; margin-top: 20px; }
-        #password-prompt input {
-            padding: 10px 20px; border: 1px solid #333; background: #333; color: white;
-            font-size: 1.2rem; outline: none; text-align: center;
+        /* Floating Label Effect */
+        .input-label {
+            position: absolute; left: 20px; top: 50%; transform: translateY(-50%);
+            color: #8c8c8c; font-size: 1rem; pointer-events: none; transition: 0.2s ease;
         }
+        /* Move label up when input has focus or value */
+        .login-input:focus + .input-label,
+        .login-input:not(:placeholder-shown) + .input-label {
+            top: 12px; font-size: 0.7rem; transform: translateY(0);
+        }
+
+        .signin-btn {
+            background: var(--netflix-red); color: white;
+            width: 100%; padding: 16px; border-radius: 4px;
+            font-size: 1rem; font-weight: 700; border: none; cursor: pointer;
+            margin-top: 24px; transition: 0.2s;
+        }
+        .signin-btn:hover { background: #f40612; }
+
+        .login-help {
+            display: flex; justify-content: space-between; margin-top: 10px;
+            color: #b3b3b3; font-size: 0.8rem;
+        }
+        .login-subtext {
+            margin-top: 40px; color: #737373; font-size: 1rem;
+        }
+        .login-subtext span { color: white; cursor: pointer; }
+        .login-subtext span:hover { text-decoration: underline; }
+
+        /* Error Message */
+        #error-msg {
+            color: #e87c03; font-size: 0.9rem; margin-top: 10px; display: none;
+        }
+
+        /* --- MAIN APP (Hidden initially) --- */
+        #main { display: none; padding-bottom: 50px; }
 
         /* --- NAVBAR --- */
         .navbar {
@@ -66,15 +118,13 @@
         .hero {
             position: relative; height: 85vh; width: 100%;
             background: url('us1.jpg') center center/cover no-repeat;
-            margin-bottom: -50px; /* Pull rows up slightly */
+            margin-bottom: -50px;
         }
-        /* Cinematic Vignette */
         .hero::after {
             content: ''; position: absolute; inset: 0;
             background: linear-gradient(to top, var(--bg-black) 10%, transparent 60%),
                         linear-gradient(to right, rgba(0,0,0,0.8) 0%, transparent 50%);
         }
-        
         .hero-content {
             position: absolute; bottom: 35%; left: 4%; z-index: 10;
             max-width: 600px;
@@ -105,7 +155,6 @@
             font-size: 1.4vw; color: #e5e5e5; font-weight: 700; 
             margin-bottom: 0.5em; text-transform: capitalize;
         }
-        
         .row-scroller {
             display: flex; overflow-x: auto; overflow-y: hidden;
             gap: 10px; padding: 20px 0;
@@ -129,15 +178,13 @@
         }
         .card:hover .card-title { opacity: 1; }
 
-        /* --- TOP 10 SPECIFIC STYLES --- */
+        /* --- TOP 10 --- */
         .top10-container {
             display: flex; align-items: center; position: relative;
-            /* Top 10 cards are taller */
             height: 200px; width: 220px; flex: 0 0 auto;
             margin-right: 40px; cursor: pointer; transition: 0.3s;
         }
         .top10-container:hover { transform: scale(1.1); z-index: 50; }
-
         .big-number {
             font-family: 'Bebas Neue', sans-serif; font-size: 14rem; 
             line-height: 1; position: absolute; left: -20px; bottom: 0;
@@ -146,8 +193,7 @@
         }
         .top10-img {
             position: absolute; right: 0; top: 0; bottom: 0;
-            width: 140px; height: 200px; object-fit: cover; z-index: 2;
-            border-radius: 4px;
+            width: 140px; height: 200px; object-fit: cover; z-index: 2; border-radius: 4px;
         }
 
         /* --- MODALS --- */
@@ -156,8 +202,6 @@
             background: rgba(0,0,0,0.8); align-items: center; justify-content: center;
             animation: fadeIn 0.3s;
         }
-        
-        /* Story Modal - Pop-up style */
         .modal-box {
             background: #181818; width: 90%; max-width: 800px; border-radius: 10px;
             overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -178,7 +222,6 @@
         }
         .circle-btn:hover { border-color: white; background: white; color: black; }
         
-        /* Comments */
         .comments-box { margin-top: 10px; }
         .comment-input {
             width: 100%; background: #000; border: 1px solid #333; padding: 10px;
@@ -188,18 +231,37 @@
         .comment { padding: 5px 0; border-bottom: 1px solid #222; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
     </style>
 </head>
 <body>
 
 <div id="login-overlay">
-    <div class="profile-container" onclick="document.getElementById('password-prompt').style.display='block'">
-        <div class="profile-img"></div>
-        <div class="profile-name">Boothang & Me</div>
-    </div>
-    <div id="password-prompt">
-        <input type="password" id="password" placeholder="Password (Boothang43)" autofocus>
+    <div class="login-logo">LOVEFLIX</div>
+    
+    <div class="login-card">
+        <h1>Sign In</h1>
+        
+        <div class="input-group">
+            <input type="password" id="password" class="login-input" placeholder=" " required>
+            <label for="password" class="input-label">Password</label>
+        </div>
+        
+        <div id="error-msg">Incorrect password. Please try again.</div>
+        
+        <button class="signin-btn" onclick="checkPassword()">Sign In</button>
+        
+        <div class="login-help">
+            <div>
+                <input type="checkbox" checked style="accent-color: #b3b3b3;"> Remember me
+            </div>
+            <div>Need help?</div>
+        </div>
+
+        <div class="login-subtext">
+            New to Loveflix? <span>Sign up now</span>.
+            <br><br>
+            <small style="font-size: 0.8rem;">This page is protected by Google reCAPTCHA to ensure you're not a robot.</small>
+        </div>
     </div>
 </div>
 
@@ -226,20 +288,16 @@
         <h2>Top 10 Memories Today</h2>
         <div class="row-scroller">
             <div class="top10-container" onclick="openStory('page7')">
-                <div class="big-number">1</div>
-                <img src="us21.jpg" class="top10-img">
+                <div class="big-number">1</div><img src="us21.jpg" class="top10-img">
             </div>
             <div class="top10-container" onclick="openStory('page3')">
-                <div class="big-number">2</div>
-                <img src="us27.jpg" class="top10-img">
+                <div class="big-number">2</div><img src="us27.jpg" class="top10-img">
             </div>
             <div class="top10-container" onclick="openStory('page10')">
-                <div class="big-number">3</div>
-                <img src="us3.jpg" class="top10-img">
+                <div class="big-number">3</div><img src="us3.jpg" class="top10-img">
             </div>
             <div class="top10-container" onclick="openStory('page4')">
-                <div class="big-number">4</div>
-                <img src="us4.jpg" class="top10-img">
+                <div class="big-number">4</div><img src="us4.jpg" class="top10-img">
             </div>
         </div>
     </div>
@@ -247,60 +305,36 @@
     <div class="row">
         <h2>Season 1: The Beginning</h2>
         <div class="row-scroller">
-            <div class="card" onclick="openStory('page3')">
-                <img src="us27.jpg" loading="lazy">
-                <div class="card-title">Our First Date</div>
-            </div>
-            <div class="card" onclick="openStory('page4')">
-                <img src="us4.jpg" loading="lazy">
-                <div class="card-title">Our Journey</div>
-            </div>
-            <div class="card" onclick="openStory('page5')">
-                <img src="us1.jpg" loading="lazy">
-                <div class="card-title">Ups & Downs</div>
-            </div>
+            <div class="card" onclick="openStory('page3')"><img src="us27.jpg" loading="lazy"><div class="card-title">Our First Date</div></div>
+            <div class="card" onclick="openStory('page4')"><img src="us4.jpg" loading="lazy"><div class="card-title">Our Journey</div></div>
+            <div class="card" onclick="openStory('page5')"><img src="us1.jpg" loading="lazy"><div class="card-title">Ups & Downs</div></div>
         </div>
     </div>
 
     <div class="row">
         <h2>Season 2: Growing Stronger</h2>
         <div class="row-scroller">
-            <div class="card" onclick="openStory('page6')">
-                <img src="us24.jpg" loading="lazy">
-                <div class="card-title">Just Between Us</div>
-            </div>
-            <div class="card" onclick="openStory('page7')">
-                <img src="us21.jpg" loading="lazy">
-                <div class="card-title">Favorite Moments</div>
-            </div>
-            <div class="card" onclick="openStory('page8')">
-                <img src="us25.jpg" loading="lazy">
-                <div class="card-title">Inside Jokes</div>
-            </div>
+            <div class="card" onclick="openStory('page6')"><img src="us24.jpg" loading="lazy"><div class="card-title">Just Between Us</div></div>
+            <div class="card" onclick="openStory('page7')"><img src="us21.jpg" loading="lazy"><div class="card-title">Favorite Moments</div></div>
+            <div class="card" onclick="openStory('page8')"><img src="us25.jpg" loading="lazy"><div class="card-title">Inside Jokes</div></div>
         </div>
     </div>
 
     <div class="row">
         <h2>Season 3: Forever</h2>
         <div class="row-scroller">
-            <div class="card" onclick="openStory('page9')">
-                <img src="us20.jpg" loading="lazy">
-                <div class="card-title">Our Melody</div>
-            </div>
-            <div class="card" onclick="openStory('page10')">
-                <img src="us3.jpg" loading="lazy">
-                <div class="card-title">Our Wedding</div>
-            </div>
+            <div class="card" onclick="openStory('page9')"><img src="us20.jpg" loading="lazy"><div class="card-title">Our Melody</div></div>
+            <div class="card" onclick="openStory('page10')"><img src="us3.jpg" loading="lazy"><div class="card-title">Our Wedding</div></div>
         </div>
     </div>
 
     <div class="row">
         <h2>Because You Watched "Us"</h2>
         <div class="row-scroller">
-            <div class="card" onclick="startSlideshowFrom(11)"><img src="us12.jpg" loading="lazy"></div>
-            <div class="card" onclick="startSlideshowFrom(12)"><img src="us13.jpg" loading="lazy"></div>
-            <div class="card" onclick="startSlideshowFrom(13)"><img src="us14.jpg" loading="lazy"></div>
-            <div class="card" onclick="startSlideshowFrom(14)"><img src="us15.jpg" loading="lazy"></div>
+            <div class="card" onclick="startSlideshowFrom(13)"><img src="us13.jpg" loading="lazy"></div>
+            <div class="card" onclick="startSlideshowFrom(14)"><img src="us14.jpg" loading="lazy"></div>
+            <div class="card" onclick="startSlideshowFrom(16)"><img src="us16.jpg" loading="lazy"></div>
+            <div class="card" onclick="startSlideshowFrom(17)"><img src="us17.jpg" loading="lazy"></div>
         </div>
     </div>
 </div>
@@ -311,28 +345,22 @@
             <img id="modalHero" class="modal-hero" src="">
             <div class="close-btn" onclick="document.getElementById('contextModal').style.display='none'" style="position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.5); width: 30px; height: 30px; border-radius: 50%; text-align: center; line-height: 30px; cursor: pointer;">&times;</div>
         </div>
-        
         <div class="modal-content">
             <h2 id="modalTitle" style="font-family: 'Bebas Neue'; letter-spacing: 1px;"></h2>
-            
             <div class="modal-meta">
                 <span class="match-score">99% Match</span>
                 <span style="color: #bcbcbc;">2024</span>
                 <span class="age-rating">18+</span>
                 <span style="color: #bcbcbc;">1 Season</span>
             </div>
-
             <p id="modalDesc" style="color: white; line-height: 1.5; margin-bottom: 20px; font-size: 1rem;"></p>
-
             <div class="action-row">
                 <div class="circle-btn" id="likeBtn" onclick="toggleLike()">❤️</div>
                 <div style="color: #999; align-self: center; font-size: 0.9rem;">Rate this memory</div>
             </div>
-
             <div class="comments-box">
                 <h4 style="color: #e5e5e5; margin-bottom: 10px;">Comments</h4>
-                <div id="commentList" class="comment-list">
-                    </div>
+                <div id="commentList" class="comment-list"></div>
                 <div style="display: flex; gap: 10px; margin-top: 10px;">
                     <input type="text" id="commentInput" class="comment-input" placeholder="Say something nice...">
                     <button onclick="postComment()" style="background: white; color: black; border: none; padding: 0 15px; font-weight: bold; cursor: pointer;">Post</button>
@@ -352,44 +380,34 @@
     // --- STORY DATABASE ---
     const db = {
         'intro': { title: "The Day We Met", img: "us1.jpg", text: "We met at work. I fell for you instantly. I kept pushing, and one day it worked." },
-        
-        // Page 3: First Date (us27, us2)
         'page3': { title: "Our First Date", img: "us27.jpg", text: "We went bowling, did a little shopping, and explored together. I was excited and nervous at first, but it turned into such a fun day. (Also featuring: us2.jpg)" },
-        
-        // Page 4: Journey (us4, us5)
         'page4': { title: "Our Journey", img: "us4.jpg", text: "We met at work… and the spark was instant. For me it was surely love at first sight. (Also featuring: us5.jpg)" },
-        
-        // Page 5: Ups & Downs (us1, us23)
         'page5': { title: "Ups & Downs", img: "us1.jpg", text: "Do you remember our first big argument? Raila vs Ruto. We slept mad but woke up and solved it. Love always wins. (Also featuring: us23.jpg)" },
-        
-        // Page 6: Just Between Us (us24, us26)
         'page6': { title: "Just Between Us", img: "us24.jpg", text: "Gossiping everywhere we go. 'Ntakuja kupigwa one day'. Always giving tea. (Also featuring: us26.jpg)" },
-        
-        // Page 7: Favorite Moments (us21, us6)
         'page7': { title: "Favorite Moments", img: "us21.jpg", text: "The kiss in the Uber. Bowling. December holidays. These are the moments I live for. (Also featuring: us6.jpg)" },
-        
-        // Page 8: Inside Jokes (us25, us10)
         'page8': { title: "Inside Jokes", img: "us25.jpg", text: "Our humor is unique. It's what bonds us together. (Also featuring: us10.jpg)" },
-        
-        // Page 9: Melody (us20, us14, us22)
         'page9': { title: "Our Melody", img: "us20.jpg", text: "Beautiful in White. A Thousand Years. The soundtrack of our lives. (Also featuring: us14.jpg, us22.jpg)" },
-        
-        // Page 10: Wedding (us3, us28)
         'page10': { title: "Our First Wedding", img: "us3.jpg", text: "Attending our first ceremony together. We looked amazing. (Also featuring: us28.jpg)" }
     };
 
-    // --- GLOBAL VARIABLES ---
-    let currentKey = null;
-    let slideIndex = 0;
-    let slideInterval;
-    
-    // --- LOGIN ---
-    document.getElementById("password").addEventListener("keypress", function(e) {
-        if (e.key === "Enter" && this.value === "Boothang43") {
+    // --- LOGIN LOGIC ---
+    function checkPassword() {
+        const input = document.getElementById("password");
+        const error = document.getElementById("error-msg");
+        
+        if (input.value === "Boothang43") {
             document.getElementById("login-overlay").style.display = "none";
             document.getElementById("main").style.display = "block";
             document.getElementById("music").play().catch(e => console.log("Music blocked"));
+        } else {
+            error.style.display = "block";
+            input.style.borderBottom = "2px solid #e87c03";
         }
+    }
+    
+    // Allow "Enter" key to login
+    document.getElementById("password").addEventListener("keypress", function(e) {
+        if (e.key === "Enter") checkPassword();
     });
 
     function logout() {
@@ -397,35 +415,33 @@
         document.getElementById("main").style.display = "none";
         document.getElementById("music").pause();
         document.getElementById("password").value = "";
+        document.getElementById("error-msg").style.display = "none";
     }
 
-    // --- STORY MODAL LOGIC ---
+    // --- APP LOGIC ---
+    let currentKey = null;
+    let slideIndex = 0;
+    let slideInterval;
+
     function openStory(key) {
         currentKey = key;
         const data = db[key];
         if(!data) return;
-
         document.getElementById("modalHero").src = data.img;
         document.getElementById("modalTitle").innerText = data.title;
         document.getElementById("modalDesc").innerText = data.text;
-        
-        // Load Comments & Likes
         loadComments(key);
         updateLikeBtn(key);
-        
         document.getElementById("contextModal").style.display = "flex";
     }
 
-    // --- COMMENTS ---
     function postComment() {
         const input = document.getElementById("commentInput");
         const txt = input.value.trim();
         if(!txt) return;
-
         let comments = JSON.parse(localStorage.getItem(currentKey + "_comments") || "[]");
         comments.push(txt);
         localStorage.setItem(currentKey + "_comments", JSON.stringify(comments));
-        
         input.value = "";
         loadComments(currentKey);
     }
@@ -434,20 +450,15 @@
         const list = document.getElementById("commentList");
         list.innerHTML = "";
         let comments = JSON.parse(localStorage.getItem(key + "_comments") || "[]");
-        
-        if(comments.length === 0) {
-            list.innerHTML = "<div class='comment'><i>No comments yet.</i></div>";
-        } else {
-            comments.forEach(c => {
-                const div = document.createElement("div");
-                div.className = "comment";
-                div.innerText = "You: " + c;
-                list.appendChild(div);
-            });
-        }
+        if(comments.length === 0) list.innerHTML = "<div class='comment'><i>No comments yet.</i></div>";
+        else comments.forEach(c => {
+            const div = document.createElement("div");
+            div.className = "comment";
+            div.innerText = "You: " + c;
+            list.appendChild(div);
+        });
     }
 
-    // --- LIKES ---
     function toggleLike() {
         const isLiked = localStorage.getItem(currentKey + "_liked") === "true";
         localStorage.setItem(currentKey + "_liked", !isLiked);
@@ -458,21 +469,19 @@
         const btn = document.getElementById("likeBtn");
         const isLiked = localStorage.getItem(key + "_liked") === "true";
         if(isLiked) {
-            btn.style.background = "white";
-            btn.style.color = "red";
-            btn.innerText = "❤️"; // Or specific icon
+            btn.style.background = "white"; btn.style.color = "red"; btn.innerText = "❤️";
         } else {
-            btn.style.background = "rgba(42,42,42,0.6)";
-            btn.style.color = "white";
-            btn.innerText = "♡";
+            btn.style.background = "rgba(42,42,42,0.6)"; btn.style.color = "white"; btn.innerText = "♡";
         }
     }
 
-    // --- SLIDESHOW ---
-    // Generates list us1.jpg to us30.jpg (Handling us2.jpg as standard)
+    // --- SLIDESHOW (NO BROKEN IMAGES) ---
     const allImages = [];
     for(let i=1; i<=30; i++) {
-        allImages.push(`us${i}.jpg`);
+        // Skip broken files
+        if(i === 12 || i === 15) continue;
+        if(i === 2) allImages.push("us2.webp");
+        else allImages.push(`us${i}.jpg`);
     }
 
     function startSlideshow() {
@@ -481,8 +490,9 @@
         showSlide();
         slideInterval = setInterval(nextSlide, 2500);
     }
-
+    
     function startSlideshowFrom(idx) {
+        if(idx >= allImages.length) idx = 0;
         slideIndex = idx;
         document.getElementById("slideshowModal").style.display = "flex";
         showSlide();
@@ -493,23 +503,17 @@
         slideIndex = (slideIndex + 1) % allImages.length;
         showSlide();
     }
-
-    function showSlide() {
-        document.getElementById("slideImg").src = allImages[slideIndex];
-    }
-
+    function showSlide() { document.getElementById("slideImg").src = allImages[slideIndex]; }
     function stopSlideshow() {
         document.getElementById("slideshowModal").style.display = "none";
         clearInterval(slideInterval);
     }
 
-    // Navbar transparency effect
     window.addEventListener("scroll", () => {
         const nav = document.getElementById("navbar");
         if(window.scrollY > 50) nav.style.background = "#141414";
         else nav.style.background = "linear-gradient(to bottom, rgba(0,0,0,0.7) 10%, transparent)";
     });
-
 </script>
 </body>
 </html>
