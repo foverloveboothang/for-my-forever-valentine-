@@ -11,15 +11,11 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-background:#f7f3ec;
+background:#f8f4ed;
 font-family:'Inter',sans-serif;
 color:#1c1c1e;
-overflow-x:hidden;
 scroll-behavior:smooth;
-}
-
-html{
-scroll-snap-type:y mandatory;
+overflow-x:hidden;
 }
 
 section{
@@ -28,29 +24,28 @@ display:flex;
 align-items:center;
 justify-content:center;
 padding:100px 10%;
-scroll-snap-align:start;
-position:relative;
 }
 
 .container{
-max-width:1200px;
+max-width:1100px;
 width:100%;
 display:flex;
+gap:80px;
 align-items:center;
 justify-content:space-between;
-gap:80px;
 flex-wrap:wrap;
 }
 
+.reverse{flex-direction:row-reverse;}
+
 .text{
 flex:1;
-min-width:320px;
+min-width:300px;
 }
 
 .text h1,.text h2{
 font-family:'Playfair Display',serif;
 margin-bottom:30px;
-letter-spacing:.5px;
 }
 
 .text h1{font-size:52px;}
@@ -59,7 +54,7 @@ letter-spacing:.5px;
 .text p{
 font-size:19px;
 line-height:1.9;
-white-space:pre-line;
+white-space:pre-wrap;
 }
 
 .images{
@@ -75,18 +70,11 @@ width:340px;
 max-width:100%;
 border-radius:22px;
 box-shadow:0 30px 80px rgba(0,0,0,0.08);
-opacity:0;
-transform:translateY(60px);
-transition:all 1.2s cubic-bezier(.2,.8,.2,1);
+transition:transform .8s ease;
 }
 
-.images img.show{
-opacity:1;
-transform:translateY(0);
-}
-
-.reverse{
-flex-direction:row-reverse;
+.images img:hover{
+transform:scale(1.04);
 }
 
 .final{
@@ -99,40 +87,49 @@ font-size:60px;
 margin-bottom:40px;
 }
 
+/* LOGIN PAGE */
+
 #login{
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:#f7f3ec;
+background:
+linear-gradient(rgba(248,244,237,0.8),rgba(248,244,237,0.8)),
+url('https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=1600&q=60');
+background-size:cover;
+background-position:center;
 }
 
-#login input{
-padding:18px;
-width:280px;
+.login-box{
+background:rgba(255,255,255,0.6);
+backdrop-filter:blur(15px);
+padding:50px;
+border-radius:25px;
+text-align:center;
+box-shadow:0 20px 60px rgba(0,0,0,0.1);
+}
+
+.login-box h1{
+font-family:'Playfair Display',serif;
+margin-bottom:30px;
+}
+
+.login-box input{
+padding:16px;
+width:250px;
 border:1px solid #ddd;
-border-radius:14px;
+border-radius:12px;
 text-align:center;
 font-size:16px;
-background:white;
 outline:none;
-transition:.3s;
-}
-
-#login input:focus{
-border-color:#1c1c1e;
 }
 
 audio{display:none;}
 
 @media(max-width:900px){
-.container{
-flex-direction:column;
-text-align:center;
-}
-.reverse{
-flex-direction:column;
-}
+.container{flex-direction:column;text-align:center;}
+.reverse{flex-direction:column;}
 .text h1{font-size:34px;}
 .text h2{font-size:26px;}
 .text p{font-size:17px;}
@@ -144,27 +141,40 @@ flex-direction:column;
 <body>
 
 <div id="login">
+<div class="login-box">
+<h1>For My Forever Valentine 🤍</h1>
 <input type="password" id="password" placeholder="Enter password">
+</div>
 </div>
 
 <div id="main" style="display:none;">
 
-<!-- PAGE 1 -->
+<!-- 1 -->
 <section>
 <div class="container">
 <div class="text">
 <h1>The Day We Met</h1>
-<p>PASTE YOUR ORIGINAL TEXT EXACTLY HERE</p>
+<p>The Day We Met
+We met at work when I was asked to train you.
+ I fell for you instantly, even
+though you didn’t like my vibe at first 😅
+ I kept pushing, and one day it worked.
+ The day you left, we went home together — and                               
+  that’s when everything clicked</p>
 </div>
 </div>
 </section>
 
-<!-- PAGE 2 -->
+<!-- 2 -->
 <section>
 <div class="container">
 <div class="text">
 <h2>Our First Date</h2>
-<p>PASTE ORIGINAL TEXT</p>
+<p>Our First Date
+We went bowling, did a little shopping, and explored together.
+ I was excited and nervous at first, but it turned into such a fun day.
+ We laughed, enjoyed every moment, and you completely surprised me — especially at bowling 😍
+ That day will always stay with me.</p>
 </div>
 <div class="images">
 <img src="us27.jpg">
@@ -173,12 +183,18 @@ flex-direction:column;
 </div>
 </section>
 
-<!-- PAGE 3 -->
+<!-- 3 -->
 <section>
 <div class="container reverse">
 <div class="text">
 <h2>Our Journey</h2>
-<p>PASTE ORIGINAL TEXT</p>
+<p>Our Journey
+We met at work… and the
+spark was
+For me It was instant.
+surely love at
+ From bowling
+first sight to shopping and exploring,</p>
 </div>
 <div class="images">
 <img src="us4.jpg">
@@ -187,12 +203,16 @@ flex-direction:column;
 </div>
 </section>
 
-<!-- PAGE 4 -->
+<!-- 4 -->
 <section>
 <div class="container">
 <div class="text">
 <h2>Our Ups and Downs</h2>
-<p>PASTE ORIGINAL TEXT</p>
+<p>Our Ups and Downs
+
+Do you still remember our first big argument? 
+We fought about politics — Raila vs Ruto 😅
+ You were team Ruto, I was team Raila, and we were both stubborn.  We even slept mad and continued the argument kidogo the next morning.  But we talked it out… and love won 🤍</p>
 </div>
 <div class="images">
 <img src="us1.jpg">
@@ -201,12 +221,15 @@ flex-direction:column;
 </div>
 </section>
 
-<!-- PAGE 5 -->
+<!-- 5 -->
 <section>
 <div class="container reverse">
 <div class="text">
 <h2>Just Between Us</h2>
-<p>PASTE ORIGINAL TEXT</p>
+<p>Just Between Us 
+Do you remember how we’d keep gossiping about people everywhere we went, especially at events? 😂
+Always giving tea, always whispering, until you’d laugh and say, “Ntakuja kupigwa one day, aki
+sisi.” 🤍</p>
 </div>
 <div class="images">
 <img src="us24.jpg">
@@ -215,12 +238,16 @@ flex-direction:column;
 </div>
 </section>
 
-<!-- PAGE 6 -->
+<!-- 6 -->
 <section>
 <div class="container">
 <div class="text">
-<h2>Favorite Moments</h2>
-<p>PASTE ORIGINAL TEXT</p>
+<h2>My Favorite Moments</h2>
+<p>My  Favorite Moments
+There are so many things that we did that never fails to make me smile and these are my top 3:
+• when you first kissed me kwa ile uber 
+• when went for bowling
+• when we had that december holiday kwenyu </p>
 </div>
 <div class="images">
 <img src="us21.jpg">
@@ -229,12 +256,15 @@ flex-direction:column;
 </div>
 </section>
 
-<!-- PAGE 7 -->
+<!-- 7 -->
 <section>
 <div class="container reverse">
 <div class="text">
 <h2>Inside Jokes</h2>
-<p>PASTE ORIGINAL TEXT</p>
+<p>Inside Jokes
+We both love to joke around. Our little inside jokes make me smile when I remember them even when we are not together. 
+• Unakumba what has happed na ule makanga wa Hii ni nini 
+I’m sure our unique humor makes our bond stronger </p>
 </div>
 <div class="images">
 <img src="us25.jpg">
@@ -243,12 +273,14 @@ flex-direction:column;
 </div>
 </section>
 
-<!-- PAGE 8 -->
+<!-- 8 -->
 <section>
 <div class="container">
 <div class="text">
-<h2>Favorite Melody</h2>
-<p>PASTE ORIGINAL TEXT</p>
+<h2>My Favorite Melody for us</h2>
+<p>My Favorite Melody for us 
+When we asked each other what song we would like to be played on our wedding day, we both said the same thing. (A thousand Years Christina Perri &Beautiful in white -Shane Filan)
+We’re going to make sure it will be played when I walk down the aisle.</p>
 </div>
 <div class="images">
 <img src="us20.jpg">
@@ -258,12 +290,11 @@ flex-direction:column;
 </div>
 </section>
 
-<!-- PAGE 9 -->
+<!-- 9 -->
 <section>
 <div class="container reverse">
 <div class="text">
-<h2>First Wedding</h2>
-<p>PASTE ORIGINAL TEXT</p>
+<h2>Our First Wedding together</h2>
 </div>
 <div class="images">
 <img src="us3.jpg">
@@ -272,11 +303,26 @@ flex-direction:column;
 </div>
 </section>
 
-<!-- FINAL -->
+<!-- 10 -->
+<section>
+<div class="final">
+<h1>When You Accepted to be my girlfriend ...</h1>
+<p>When You Accepted to be my girlfriend ...
+You made me the happiest man in the whole world.
+I was so excited to spend the rest of my life loving and spoiling you until uchoke babe 
+I hope am doing a great job as your boyfriend so far </p>
+</div>
+</section>
+
+<!-- 11 -->
 <section>
 <div class="final">
 <h1>From Me To You</h1>
-<p>PASTE YOUR FULL ORIGINAL FINAL MESSAGE HERE EXACTLY AS WRITTEN</p>
+<p>From Me To You
+
+I will always be thankful that we met. You have changed my life in so many ways There is nothing I would want more than to spend the rest of my life with my forever Valentine.
+
+I LOVE AND ADORE YOU PAUL.</p>
 </div>
 </section>
 
@@ -296,17 +342,6 @@ document.getElementById("music").play();
 }
 }
 });
-
-const images=document.querySelectorAll("img");
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add("show");
-}
-});
-},{threshold:0.2});
-
-images.forEach(img=>observer.observe(img));
 </script>
 
 </body>
